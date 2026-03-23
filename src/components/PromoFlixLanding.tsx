@@ -1,328 +1,464 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll } from 'motion/react';
-import Navbar from './Navbar';
-import HeroNew from './HeroNew';
-import PainPointsSection from './PainPointsSection';
-import HowTeamsSection from './HowTeamsSection';
-import HowItWorksSection from './HowItWorksSection';
-import ByTheNumbersNew from './ByTheNumbersNew';
-import PricingSection from './PricingSection';
-import TestimonialsNew from './TestimonialsNew';
-import Cta from '../imports/Cta';
-import Footer from '../imports/Footer-58-1400';
+import { useEffect, useState } from 'react';
+import Layout1440 from '../designs/Layout1440';
+import Layout1024 from '../designs/Layout1024';
+import Layout768 from '../designs/Layout768';
+import Layout375 from '../designs/Layout375';
 import { LoginModal } from './LoginModal';
 
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1]
-    }
+function getSectionTarget(label: string) {
+  if (label.includes('How it works')) {
+    return document.getElementById('how-it-works');
   }
-};
 
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -60 },
-  visible: { 
-    opacity: 1, 
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1]
-    }
+  if (label.includes('See real example')) {
+    return document.getElementById('industries');
   }
-};
 
-const fadeInRight = {
-  hidden: { opacity: 0, x: 60 },
-  visible: { 
-    opacity: 1, 
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1]
-    }
+  if (label.includes('Pricing')) {
+    return document.getElementById('pricing');
   }
-};
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1
-    }
+  return null;
+}
+
+function setupLoopingTrack(section: HTMLElement, track: HTMLElement, cardSelector: string, trackClass: string) {
+  track.classList.add(trackClass);
+  const cards = Array.from(track.children).filter((child) => {
+    return child instanceof HTMLElement && child.matches(cardSelector);
+  });
+
+  const computedStyle = window.getComputedStyle(track);
+  const gapValue = Number.parseFloat(computedStyle.gap || computedStyle.columnGap || '0') || 0;
+
+  if (track.dataset.marqueeReady !== 'true') {
+    cards.forEach((child) => {
+      const clone = child.cloneNode(true);
+      if (clone instanceof HTMLElement) {
+        clone.setAttribute('aria-hidden', 'true');
+        clone.dataset.clone = 'true';
+        track.appendChild(clone);
+      }
+    });
+
+    track.dataset.marqueeReady = 'true';
   }
-};
+
+  const originalWidth = cards.reduce((total, card, index) => {
+    return total + card.getBoundingClientRect().width + (index > 0 ? gapValue : 0);
+  }, 0);
+
+  section.dataset.hasMarquee = 'true';
+  track.style.setProperty('--loop-distance', `${originalWidth}px`);
+  return originalWidth;
+}
 
 export function PromoFlixLanding() {
+  const [width, setWidth] = useState(() => window.innerWidth);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [loginMode, setLoginMode] = useState<'login' | 'signup'>('login');
   const [showScrollTop, setShowScrollTop] = useState(false);
-  
-  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 500);
     };
 
-    const setupInteractivity = () => {
-      const buttons = document.querySelectorAll('button, [role="button"], a, [data-name*="Button"], [data-cta-button]');
-      
-      buttons.forEach((btn) => {
-        if (!btn.getAttribute('data-interactive-added')) {
-          btn.setAttribute('data-interactive-added', 'true');
-          
-          btn.addEventListener('click', (e) => {
-            const btnText = btn.textContent?.trim() || '';
-            const isCtaButton = btn.getAttribute('data-cta-button');
-            
-            if (isCtaButton === 'login' || btnText.includes('Login')) {
-              e.preventDefault();
-              e.stopPropagation();
-              setLoginMode('login');
-              setShowLoginModal(true);
-            } else if (
-              btnText.includes('Start free') ||
-              btnText.includes('free') ||
-              btnText.includes('Choose Plan') ||
-              btnText.includes('Demo')
-            ) {
-              e.preventDefault();
-              e.stopPropagation();
-              setLoginMode('signup');
-              setShowLoginModal(true);
-            }
-            
-            // Ripple effect
-            const ripple = document.createElement('span');
-            ripple.className = 'ripple-effect';
-            const rect = btn.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = (e as MouseEvent).clientX - rect.left - size / 2 + 'px';
-            ripple.style.top = (e as MouseEvent).clientY - rect.top - size / 2 + 'px';
-            btn.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
-            
-            createParticles(e as MouseEvent);
-          });
-        }
-      });
-    };
-
-    const createParticles = (e: MouseEvent) => {
-      const colors = ['#FFC107', '#4A9EFF', '#FF6B6B', '#4ECDC4'];
-      for (let i = 0; i < 6; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'click-particle';
-        particle.style.left = e.clientX + 'px';
-        particle.style.top = e.clientY + 'px';
-        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        
-        const angle = (Math.PI * 2 * i) / 6;
-        const velocity = 100 + Math.random() * 50;
-        const tx = Math.cos(angle) * velocity;
-        const ty = Math.sin(angle) * velocity;
-        
-        particle.style.setProperty('--tx', `${tx}px`);
-        particle.style.setProperty('--ty', `${ty}px`);
-        
-        document.body.appendChild(particle);
-        setTimeout(() => particle.remove(), 1000);
-      }
-    };
-
-    setTimeout(setupInteractivity, 300);
+    window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
-    
+    handleScroll();
+
     return () => {
+      window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const cleanupFns: Array<() => void> = [];
+
+    const applySectionIds = () => {
+      const howItWorks = document.querySelector('[data-name="How it works aka solution"]');
+      const industries = document.querySelector('[data-name="How teams use promoflix"]');
+      const pricing = document.querySelector('[data-name="Pricing"]');
+
+      if (howItWorks instanceof HTMLElement) {
+        howItWorks.id = 'how-it-works';
+      }
+
+      if (industries instanceof HTMLElement) {
+        industries.id = 'industries';
+      }
+
+      if (pricing instanceof HTMLElement) {
+        pricing.id = 'pricing';
+      }
+    };
+
+    const setupIndustriesMarquee = () => {
+      const section = document.querySelector('[data-name="How teams use promoflix"]');
+      if (!(section instanceof HTMLElement)) {
+        return;
+      }
+
+      const container = section.querySelector('[data-name="container"]');
+      if (!(container instanceof HTMLElement)) {
+        return;
+      }
+
+      const track = Array.from(container.children).find((child, index) => {
+        return index === 1 && child instanceof HTMLElement;
+      });
+
+      if (!(track instanceof HTMLElement)) {
+        return;
+      }
+
+      const originalWidth = setupLoopingTrack(section, track, '[data-name="CARD (for now)"]', 'industries-marquee-track');
+      if (track.dataset.autoMarqueeReady === 'true' || originalWidth <= 0) {
+        return;
+      }
+
+      let rafId = 0;
+      let lastTimestamp = 0;
+      let offset = 0;
+      const pxPerSecond = 36;
+      const pauseUntil = { value: 0 };
+
+      const pause = () => {
+        pauseUntil.value = Date.now() + 2000;
+      };
+
+      const step = (timestamp: number) => {
+        if (!track.isConnected) {
+          return;
+        }
+
+        if (!lastTimestamp) {
+          lastTimestamp = timestamp;
+        }
+
+        if (!track.matches(':hover') && Date.now() > pauseUntil.value) {
+          const delta = timestamp - lastTimestamp;
+          offset -= (pxPerSecond * delta) / 1000;
+
+          if (Math.abs(offset) >= originalWidth) {
+            offset += originalWidth;
+          }
+
+          track.style.transform = `translate3d(${offset}px, 0, 0)`;
+        }
+
+        lastTimestamp = timestamp;
+        rafId = window.requestAnimationFrame(step);
+      };
+
+      track.dataset.autoMarqueeReady = 'true';
+      track.addEventListener('mouseenter', pause);
+      track.addEventListener('wheel', pause, { passive: true });
+      track.addEventListener('touchstart', pause, { passive: true });
+      rafId = window.requestAnimationFrame(step);
+
+      cleanupFns.push(() => {
+        window.cancelAnimationFrame(rafId);
+        track.style.transform = '';
+        track.removeEventListener('mouseenter', pause);
+        track.removeEventListener('wheel', pause);
+        track.removeEventListener('touchstart', pause);
+      });
+    };
+
+    const setupTestimonialsScroller = () => {
+      const section = document.querySelector('[data-name="Testimonials"]');
+      if (!(section instanceof HTMLElement)) {
+        return;
+      }
+
+      const containers = Array.from(section.querySelectorAll('[data-name="Container"]'));
+      const track = containers.at(-1);
+      if (!(track instanceof HTMLElement)) {
+        return;
+      }
+
+      const cards = Array.from(track.children).filter((child) => {
+        return child instanceof HTMLElement && child.matches('[data-name="Testimonial card"]');
+      }) as HTMLElement[];
+
+      if (cards.length === 0) {
+        return;
+      }
+
+      const originalWidth = setupLoopingTrack(section, track, '[data-name="Testimonial card"]', 'testimonials-loop-track');
+      if (track.dataset.testimonialsAutoScrollReady === 'true' || originalWidth <= 0) {
+        return;
+      }
+
+      let rafId = 0;
+      let lastTimestamp = 0;
+      const pxPerSecond = 32;
+      const pauseUntil = { value: 0 };
+
+      const pauseAutoScroll = () => {
+        pauseUntil.value = Date.now() + 3000;
+      };
+
+      const step = (timestamp: number) => {
+        if (!track.isConnected) {
+          return;
+        }
+
+        if (!lastTimestamp) {
+          lastTimestamp = timestamp;
+        }
+
+        if (!track.matches(':hover') && Date.now() > pauseUntil.value) {
+          const delta = timestamp - lastTimestamp;
+          track.scrollLeft += (pxPerSecond * delta) / 1000;
+
+          if (track.scrollLeft >= originalWidth) {
+            track.scrollLeft -= originalWidth;
+          }
+        }
+
+        lastTimestamp = timestamp;
+        rafId = window.requestAnimationFrame(step);
+      };
+
+      track.dataset.testimonialsAutoScrollReady = 'true';
+      track.addEventListener('mouseenter', pauseAutoScroll);
+      track.addEventListener('wheel', pauseAutoScroll, { passive: true });
+      track.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+      track.addEventListener('pointerdown', pauseAutoScroll);
+      rafId = window.requestAnimationFrame(step);
+
+      cleanupFns.push(() => {
+        window.cancelAnimationFrame(rafId);
+        track.removeEventListener('mouseenter', pauseAutoScroll);
+        track.removeEventListener('wheel', pauseAutoScroll);
+        track.removeEventListener('touchstart', pauseAutoScroll);
+        track.removeEventListener('pointerdown', pauseAutoScroll);
+      });
+    };
+
+    const setupPricingToggle = () => {
+      const section = document.querySelector('[data-name="Pricing"]');
+      if (!(section instanceof HTMLElement)) {
+        return;
+      }
+
+      const toggle = section.querySelector('[data-name="Monthly/yearly toggle"]');
+      const cards = Array.from(section.querySelectorAll('[data-name="Pricing card"]')).filter((card) => card instanceof HTMLElement) as HTMLElement[];
+      if (!(toggle instanceof HTMLElement) || cards.length < 4) {
+        return;
+      }
+
+      const buttons = Array.from(toggle.children).filter((child) => child instanceof HTMLElement) as HTMLElement[];
+      if (buttons.length < 2) {
+        return;
+      }
+
+      buttons[0].dataset.pricingMode = 'monthly';
+      buttons[1].dataset.pricingMode = 'yearly';
+
+      const plans = {
+        monthly: [
+          { name: 'Free forever', price: '$0', suffix: '' },
+          { name: 'Explorer Plan', price: '$49', suffix: '/mo' },
+          { name: 'Rainmaker Plan', price: '$149', suffix: '/mo' },
+          { name: 'Titan Plan', price: '$399', suffix: '/mo' },
+        ],
+        yearly: [
+          { name: 'Free forever', price: '$0', suffix: '' },
+          { name: 'Explorer Plan', price: '$44', suffix: '/mo' },
+          { name: 'Rainmaker Plan', price: '$134', suffix: '/mo' },
+          { name: 'Titan Plan', price: '$359', suffix: '/mo' },
+        ],
+      } as const;
+
+      const renderPlanState = (mode: keyof typeof plans) => {
+        cards.forEach((card, index) => {
+          const plan = plans[mode][index];
+          const title = card.querySelector('[data-name="Main text"] > p:first-child');
+          if (title instanceof HTMLElement) {
+            title.textContent = plan.name;
+          }
+
+          const priceBlock = card.querySelector('[data-name="Price"]');
+          if (!(priceBlock instanceof HTMLElement)) {
+            return;
+          }
+
+          let price = priceBlock.querySelector('p:first-child');
+          if (!(price instanceof HTMLElement)) {
+            price = document.createElement('p');
+            priceBlock.prepend(price);
+          }
+
+          price.textContent = plan.price;
+          price.style.display = 'block';
+          price.style.visibility = 'visible';
+          price.style.opacity = '1';
+
+          let suffix = priceBlock.querySelector('p:last-child');
+          if (!(suffix instanceof HTMLElement) || suffix === price) {
+            suffix = document.createElement('p');
+            priceBlock.appendChild(suffix);
+          }
+
+          suffix.textContent = plan.suffix;
+          suffix.style.display = plan.suffix ? 'block' : 'none';
+          suffix.style.visibility = plan.suffix ? 'visible' : 'hidden';
+          suffix.style.opacity = plan.suffix ? '1' : '0';
+
+          priceBlock.style.display = 'flex';
+          priceBlock.style.alignItems = 'baseline';
+          priceBlock.style.gap = '0';
+          priceBlock.style.visibility = 'visible';
+          priceBlock.style.opacity = '1';
+        });
+
+        const labels = ['Monthly', 'Yearly (Save 10%)'];
+        buttons.forEach((button, index) => {
+          const isActive = (mode === 'monthly' && index === 0) || (mode === 'yearly' && index === 1);
+          button.style.background = isActive ? '#ffffff' : 'transparent';
+          button.style.boxShadow = isActive ? '0px 1px 4px rgba(12,12,13,0.05)' : 'none';
+          button.style.cursor = 'pointer';
+
+          const text = button.querySelector('p');
+          if (text instanceof HTMLElement) {
+            text.textContent = labels[index];
+            text.style.color = isActive ? '#000000' : '#5b5c5e';
+            text.style.visibility = 'visible';
+            text.style.opacity = '1';
+          }
+        });
+
+        toggle.dataset.activePricingMode = mode;
+      };
+
+      if (toggle.dataset.pricingReady !== 'true') {
+        toggle.addEventListener('click', (event) => {
+          const target = event.target;
+          if (!(target instanceof HTMLElement)) {
+            return;
+          }
+
+          const selected = target.closest('[data-pricing-mode]');
+          if (!(selected instanceof HTMLElement)) {
+            return;
+          }
+
+          const mode = selected.dataset.pricingMode;
+          if (mode === 'monthly' || mode === 'yearly') {
+            renderPlanState(mode);
+          }
+        });
+
+        toggle.dataset.pricingReady = 'true';
+      }
+
+      renderPlanState('yearly');
+    };
+
+    const setupInteractivity = () => {
+      applySectionIds();
+      setupIndustriesMarquee();
+      setupTestimonialsScroller();
+      setupPricingToggle();
+
+      const targets = document.querySelectorAll('[data-name="Button"], [data-name*="Button"], button, a, [role="button"]');
+
+      targets.forEach((target) => {
+        if (!(target instanceof HTMLElement) || target.dataset.interactiveAdded === 'true') {
+          return;
+        }
+
+        target.dataset.interactiveAdded = 'true';
+        target.style.cursor = 'pointer';
+
+        target.addEventListener('click', (event) => {
+          const label = target.textContent?.replace(/\s+/g, ' ').trim() ?? '';
+          const sectionTarget = getSectionTarget(label);
+
+          if (sectionTarget) {
+            event.preventDefault();
+            sectionTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+          }
+
+          if (label.includes('Login')) {
+            event.preventDefault();
+            setLoginMode('login');
+            setShowLoginModal(true);
+            return;
+          }
+
+          if (label.includes('Estimate your ROI')) {
+            event.preventDefault();
+            window.open('https://promoflix.ai/roi-calculator/', '_blank', 'noopener,noreferrer');
+            return;
+          }
+
+          if (
+            label.includes('Try') ||
+            label.includes('Choose Plan') ||
+            label.includes('Get a real example') ||
+            label.includes('See real example') ||
+            label.includes('Watch demo')
+          ) {
+            event.preventDefault();
+            setLoginMode('signup');
+            setShowLoginModal(true);
+          }
+        });
+      });
+    };
+
+    let timeoutId = 0;
+    const frameId = window.requestAnimationFrame(() => {
+      setupInteractivity();
+      timeoutId = window.setTimeout(setupInteractivity, 0);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.clearTimeout(timeoutId);
+      cleanupFns.forEach((cleanup) => cleanup());
+    };
+  }, [width]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const openSignup = () => {
-    setLoginMode('signup');
-    setShowLoginModal(true);
-  };
+  const currentLayout =
+    width >= 1440 ? <Layout1440 /> :
+    width >= 1024 ? <Layout1024 /> :
+    width >= 768 ? <Layout768 /> :
+    <Layout375 />;
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Scroll Progress Indicator */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FFC107] via-[#4A9EFF] to-[#FFC107] origin-left z-[100]"
-        style={{ scaleX: scrollYProgress }}
-      />
+      {currentLayout}
 
-      {/* Background gradient */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
-        <motion.div
-          className="absolute w-[600px] h-[600px] rounded-full blur-3xl opacity-20"
-          style={{ 
-            background: 'radial-gradient(circle, rgba(255, 193, 7, 0.3) 0%, transparent 70%)',
-            top: '10%',
-            left: '-10%'
-          }}
-          animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </div>
+      {showLoginModal && (
+        <LoginModal onClose={() => setShowLoginModal(false)} initialMode={loginMode} />
+      )}
 
-      {/* Navigation */}
-      <motion.div 
-        className="fixed top-4 left-1/2 -translate-x-1/2 w-full max-w-[1200px] px-4 z-50"
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-      >
-        <Navbar 
-          onLoginClick={() => { setLoginMode('login'); setShowLoginModal(true); }}
-          onStartFreeClick={openSignup}
-        />
-      </motion.div>
-
-      {/* Hero Section */}
-      <motion.div 
-        className="relative z-10 pt-24 pb-0"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        <HeroNew
-          onTryFreeClick={openSignup}
-          onSeeExampleClick={openSignup}
-        />
-      </motion.div>
-
-      {/* Pain Points */}
-      <motion.div
-        className="relative z-10"
-        variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        <PainPointsSection />
-      </motion.div>
-
-      {/* How It Works */}
-      <motion.div
-        id="how-it-works"
-        className="relative z-10"
-        variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        <HowItWorksSection onWatchDemoClick={openSignup} />
-      </motion.div>
-
-      {/* How Teams Use Promoflix */}
-      <motion.div
-        id="industries"
-        className="relative z-10"
-        variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        <HowTeamsSection onSendExampleClick={openSignup} />
-      </motion.div>
-
-      {/* By the Numbers */}
-      <motion.div
-        className="relative z-10"
-        variants={fadeInRight}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        <ByTheNumbersNew onEstimateROIClick={openSignup} />
-      </motion.div>
-
-      {/* Pricing */}
-      <motion.div
-        id="pricing"
-        className="relative z-10"
-        variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        <PricingSection
-          onTryFreeClick={openSignup}
-          onChoosePlanClick={openSignup}
-        />
-      </motion.div>
-
-      {/* Testimonials */}
-      <motion.div
-        className="relative z-10"
-        variants={fadeInLeft}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        <TestimonialsNew />
-      </motion.div>
-
-      {/* CTA Section */}
-      <motion.div 
-        className="relative z-10"
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        <Cta />
-      </motion.div>
-
-      {/* Footer */}
-      <motion.div 
-        className="relative z-10"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <Footer />
-      </motion.div>
-
-      {/* Login Modal */}
-      <AnimatePresence>
-        {showLoginModal && (
-          <LoginModal onClose={() => setShowLoginModal(false)} initialMode={loginMode} />
-        )}
-      </AnimatePresence>
-
-      {/* Scroll to Top */}
-      <AnimatePresence>
-        {showScrollTop && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            onClick={scrollToTop}
-            className="fixed bottom-8 left-8 p-4 bg-black text-white rounded-full shadow-2xl z-50"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 19V5M5 12l7-7 7 7" />
-            </svg>
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {showScrollTop && (
+        <button
+          aria-label="Scroll to top"
+          className="fixed bottom-8 left-8 z-50 rounded-full bg-black p-4 text-white shadow-2xl transition-transform hover:scale-110 active:scale-95"
+          onClick={scrollToTop}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M12 19V5M5 12l7-7 7 7" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 }
