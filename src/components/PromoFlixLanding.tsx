@@ -317,8 +317,9 @@ export function PromoFlixLanding() {
 
           if (label.includes('Login')) {
             event.preventDefault();
-            setLoginMode('login');
-            setShowLoginModal(true);
+            // setLoginMode('login');
+            // setShowLoginModal(true);
+            window.location.href = 'https://app.promoflix.ai/auth/login';
             return;
           }
 
@@ -328,16 +329,25 @@ export function PromoFlixLanding() {
             return;
           }
 
+          if (label.includes('Try')) {
+            event.preventDefault();
+            // setLoginMode('signup');
+            // setShowLoginModal(true);
+            window.location.href = 'https://app.promoflix.ai/auth/signup';
+          }
+
+          if (label.includes('Choose Plan')) {
+            event.preventDefault();
+            window.location.href = 'https://app.promoflix.ai/home/plan';
+          }
+
           if (
-            label.includes('Try') ||
-            label.includes('Choose Plan') ||
             label.includes('Get a real example') ||
             label.includes('See real example') ||
             label.includes('Watch demo')
           ) {
             event.preventDefault();
-            setLoginMode('signup');
-            setShowLoginModal(true);
+            window.location.href = 'https://app.promoflix.ai/auth/login';
           }
         });
       });
@@ -362,9 +372,9 @@ export function PromoFlixLanding() {
 
   const currentLayout =
     width >= 1440 ? <Layout1440 /> :
-    width >= 1024 ? <Layout1024 /> :
-    width >= 768 ? <Layout768 /> :
-    <Layout375 />;
+      width >= 1024 ? <Layout1024 /> :
+        width >= 768 ? <Layout768 /> :
+          <Layout375 />;
 
   return (
     <div className="min-h-screen bg-white">
