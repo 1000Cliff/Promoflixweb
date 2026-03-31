@@ -79,7 +79,7 @@ export function IndustriesSection() {
   const page = industryPages[pageIndex];
 
   return (
-    <section className="bg-white py-[120px] relative w-full z-[6]" data-name="How teams use promoflix">
+    <section className="bg-white py-[120px] relative w-full z-[6]" data-name="How teams use promoflix" id="industries">
       <div className="mx-auto flex max-w-[1240px] flex-col gap-[60px] px-5 md:px-8">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between" data-name="top">
           <div className="flex max-w-[630px] flex-col gap-1">
@@ -125,7 +125,12 @@ export function IndustriesSection() {
             <p className="text-[20px] font-semibold leading-[1.5] text-[#18181b]">
               Get a real example of a Promoflix-enhanced email for your industry
             </p>
-            <div className="bg-[#2952e8] relative rounded-[8px] shrink-0" data-name="Button">
+            <div
+              className="bg-[#2952e8] relative rounded-[8px] shrink-0"
+              data-action="open-login-modal"
+              data-login-mode="signup"
+              data-name="Button"
+            >
               <div className="content-stretch flex items-center justify-center overflow-clip pl-[18px] pr-[16px] py-[12px] relative rounded-[inherit]">
                 <div className="content-stretch flex items-center justify-center px-[2px] relative shrink-0" data-name="Text padding">
                   <p className="font-['Geist:semibold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#fcfcfc] text-[16px] whitespace-nowrap">

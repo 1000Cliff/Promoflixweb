@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Mail, Lock, Eye, EyeOff, Sparkles, TrendingUp, Users, User } from 'lucide-react';
-import svgPaths from '../imports/svg-f0s15shqbf';
+import svgPaths from './login-modal-logo-paths';
 
 interface LoginModalProps {
   onClose: () => void;
