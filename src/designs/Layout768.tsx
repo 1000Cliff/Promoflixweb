@@ -177,7 +177,7 @@ function Container() {
       <div className="flex flex-col justify-center max-w-[inherit] size-full">
         <div className="content-stretch flex flex-col gap-[32px] items-start justify-center max-w-[inherit] px-[32px] relative w-full">
           <Text />
-          <div className="aspect-[610/498] relative shrink-0 w-full" data-name="img">
+          <div className="aspect-[720/463] relative shrink-0 w-full" data-name="img">
             <HeroVideo />
           </div>
         </div>

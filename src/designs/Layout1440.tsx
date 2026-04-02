@@ -232,7 +232,7 @@ function Container() {
   return (
     <div className="content-stretch flex gap-[48px] items-center max-w-[1240px] relative shrink-0 w-full" data-name="container">
       <Text />
-      <div className="h-[498px] relative shrink-0 w-[610px]" data-name="img">
+      <div className="h-[392px] relative shrink-0 w-[610px]" data-name="img">
         <HeroVideo />
       </div>
     </div>

@@ -204,7 +204,7 @@ function Container() {
       <div className="flex flex-row items-center max-w-[inherit] size-full">
         <div className="content-stretch flex gap-[32px] items-center max-w-[inherit] px-[32px] relative w-full">
           <Text />
-          <div className="aspect-[610/498] flex-[1_0_0] min-h-px min-w-px relative" data-name="img">
+          <div className="aspect-[720/463] flex-[1_0_0] min-h-px min-w-px relative" data-name="img">
             <HeroVideo />
           </div>
         </div>
