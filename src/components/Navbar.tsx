@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import svgPaths from "../imports/svg-4lz4t3iji0";
+import svgPaths from "./navbar-logo-paths";
 import imgNavbar from "figma:asset/c2b10a66c9a06b0bf91cd7f627bcbb337569e1e6.png";
 
 interface NavbarProps {

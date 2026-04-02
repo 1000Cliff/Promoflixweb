@@ -7,8 +7,18 @@ import imgImgPlaceholder from "figma:asset/d1ce0c8ed4ba32b0cb22f4484e4c90649ff6e
 import imgTopContainer from "figma:asset/4082fab549dc89b83375e04762877da0d51b6d60.png";
 import imgImgPlaceholder1 from "figma:asset/e280a99005b9bb91b1d04d38ce2c62feeae447bb.png";
 import imgImgPlaceholder2 from "figma:asset/c06da22c98853aa9dd4ede926c7f56cbf166968e.png";
-import { imgVector } from "./svg-36xu4";
+import { HeroVideo } from "../components/HeroVideo";
 import { IndustriesSection } from "../components/IndustriesSection";
+import { PricingModeToggle } from "../components/PricingModeToggle";
+import { PricingPlanCard } from "../components/PricingPlanCard";
+import { FooterPromoflixGradient } from "../components/FooterPromoflixGradient";
+import { FooterLinkColumns } from "../components/FooterLinkColumns";
+import { PRICING_CARD_META, PRICING_PLANS, PricingMode, PricingPlan } from "../components/promo-flix-landing/constants";
+
+type LayoutProps = {
+  pricingMode?: PricingMode;
+  onPricingModeChange?: (mode: PricingMode) => void;
+};
 
 function Logo() {
   return (
@@ -134,14 +144,14 @@ function TextPadding1() {
 function Actions() {
   return (
     <div className="content-stretch flex gap-[12px] items-start relative shrink-0" data-name="Actions">
-      <div className="bg-[#2952e8] relative rounded-[8px] shrink-0" data-name="Button">
+      <div className="bg-[#2952e8] relative rounded-[8px] shrink-0" data-action="open-login-modal" data-login-mode="signup" data-name="Button">
         <div className="content-stretch flex items-center justify-center overflow-clip pl-[18px] pr-[16px] py-[12px] relative rounded-[inherit]">
           <TextPadding />
         </div>
         <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]" />
         <div aria-hidden="true" className="absolute border-2 border-[rgba(255,255,255,0.12)] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)]" />
       </div>
-      <div className="bg-white relative rounded-[8px] shrink-0" data-name="Button">
+      <div className="bg-white relative rounded-[8px] shrink-0" data-action="scroll-to-section" data-section-target="industries" data-name="Button">
         <div className="content-stretch flex items-center justify-center overflow-clip px-[18px] py-[12px] relative rounded-[inherit]">
           <TextPadding1 />
         </div>
@@ -168,21 +178,7 @@ function Container() {
         <div className="content-stretch flex flex-col gap-[32px] items-start justify-center max-w-[inherit] px-[32px] relative w-full">
           <Text />
           <div className="aspect-[610/498] relative shrink-0 w-full" data-name="img">
-            <div className="absolute inset-0 overflow-hidden pointer-events-none bg-white">
-              <video
-                aria-label="Promoflix hero video"
-                autoPlay
-                className="absolute inset-0 h-full w-full object-contain object-center bg-white"
-                loop
-                muted
-                playsInline
-                preload="auto"
-              >
-                <source src="/hero-video.mp4" type="video/mp4" />
-              </video>
-              <div aria-hidden="true" className="absolute bg-white bottom-0 left-0 top-0 w-[8px]" />
-              <div aria-hidden="true" className="absolute bg-white bottom-0 right-0 top-0 w-[8px]" />
-            </div>
+            <HeroVideo />
           </div>
         </div>
       </div>
@@ -445,7 +441,7 @@ function Frame78() {
   return (
     <div className="content-stretch flex gap-[24px] items-start relative shrink-0 w-full">
       <p className="flex-[1_0_0] font-['Geist:semibold',sans-serif] font-bold leading-[1.3] min-h-px min-w-px not-italic relative text-[#18181b] text-[44px] tracking-[-2px]">Record one video, let AI personalize and deliver it to every lead</p>
-      <div className="bg-white relative rounded-[8px] shrink-0 w-[182px]" data-name="Button">
+      <div className="bg-white relative rounded-[8px] shrink-0 w-[182px]" data-action="open-login-modal" data-login-mode="signup" data-name="Button">
         <div className="content-stretch flex items-center overflow-clip px-[18px] py-[12px] relative rounded-[inherit] w-full">
           <TextPadding2 />
         </div>
@@ -1224,7 +1220,7 @@ function Container2() {
 
 function HowItWorksAkaSolution() {
   return (
-    <div className="bg-white relative shrink-0 w-full z-[7]" data-name="How it works aka solution">
+    <div className="bg-white relative shrink-0 w-full z-[7]" data-name="How it works aka solution" id="how-it-works">
       <div className="flex flex-col justify-end overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-start justify-end px-[32px] py-[88px] relative w-full">
           <Container2 />
@@ -1974,7 +1970,7 @@ function Bottom() {
       <div className="flex flex-row items-center size-full">
         <div className="content-stretch flex gap-[16px] items-center p-[24px] relative w-full">
           <Frame59 />
-          <div className="bg-[#2952e8] relative rounded-[8px] shrink-0" data-name="Button">
+          <div className="bg-[#2952e8] relative rounded-[8px] shrink-0" data-action="open-external-url" data-external-url="https://promoflix.ai/roi-calculator/" data-name="Button">
             <div className="content-stretch flex items-center justify-center overflow-clip pl-[18px] pr-[16px] py-[12px] relative rounded-[inherit]">
               <TextPadding3 />
             </div>
@@ -2408,1040 +2404,39 @@ function TopText() {
   );
 }
 
-function Frame30() {
+function MonthlyYearlyToggle({ pricingMode, onPricingModeChange }: LayoutProps) {
   return (
-    <div className="bg-white content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[10px] shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0">
-      <p className="font-['Inter:Medium',sans-serif] font-medium leading-[1.2] not-italic relative shrink-0 text-[16px] text-black tracking-[-0.32px] whitespace-nowrap">Monthly</p>
-    </div>
+    <PricingModeToggle onPricingModeChange={onPricingModeChange} pricingMode={pricingMode ?? 'yearly'} />
   );
 }
 
-function Frame44() {
-  return (
-    <div className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[10px] shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0">
-      <p className="font-['Inter:Medium',sans-serif] font-medium leading-[1.2] not-italic relative shrink-0 text-[#5b5c5e] text-[16px] tracking-[-0.32px] whitespace-nowrap">Yearly (save 10%)</p>
-    </div>
-  );
-}
-
-function MonthlyYearlyToggle() {
-  return (
-    <div className="bg-[#dce7fd] content-stretch flex gap-[4px] items-center p-[4px] relative rounded-[12px] shrink-0" data-name="Monthly/yearly toggle">
-      <Frame30 />
-      <Frame44 />
-    </div>
-  );
-}
-
-function MainText() {
-  return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start leading-[1.5] not-italic relative shrink-0 w-full" data-name="Main text">
-      <p className="font-['Geist:semibold',sans-serif] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">{`Free `}</p>
-      <p className="font-['Geist:regular',sans-serif] relative shrink-0 text-[#70707b] text-[16px] w-full">Perfect for trying out personalized video at no cost.</p>
-    </div>
-  );
-}
-
-function Price() {
-  return (
-    <div className="content-stretch flex items-baseline relative shrink-0" data-name="Price">
-      <p className="font-['Geist:semibold',sans-serif] leading-[1.3] not-italic relative shrink-0 text-[#111] text-[44px] tracking-[-2px] whitespace-nowrap">Free</p>
-    </div>
-  );
-}
-
-function Content4() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Content">
-      <div aria-hidden="true" className="absolute border-[#f4f4f5] border-b border-solid inset-0 pointer-events-none" />
-      <div className="content-stretch flex flex-col gap-[16px] items-start p-[24px] relative w-full">
-        <MainText />
-        <Price />
-      </div>
-    </div>
-  );
-}
-
-function Frame4() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame4 />
-    </div>
-  );
-}
-
-function CheckItemText() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Personalize videos with your prospect’s name</p>
-    </div>
-  );
-}
-
-function Frame5() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap1() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame5 />
-    </div>
-  );
-}
-
-function CheckItemText1() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap1 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Try sending up to 15 messages</p>
-    </div>
-  );
-}
-
-function Frame6() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap2() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame6 />
-    </div>
-  );
-}
-
-function CheckItemText2() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap2 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Explore the full system before upgrading</p>
-    </div>
-  );
-}
-
-function Frame7() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap3() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame7 />
-    </div>
-  );
-}
-
-function CheckItemText3() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap3 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">{`Customize 1 variable `}</p>
-    </div>
-  );
-}
-
-function Frame8() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap4() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame8 />
-    </div>
-  );
-}
-
-function CheckItemText4() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap4 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Support via email</p>
-    </div>
-  );
-}
-
-function CheckItems() {
-  return (
-    <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Check items">
-      <div aria-hidden="true" className="absolute border-[#f4f4f5] border-b border-solid inset-0 pointer-events-none" />
-      <div className="content-stretch flex flex-col gap-[12px] items-start p-[24px] relative size-full">
-        <CheckItemText />
-        <CheckItemText1 />
-        <CheckItemText2 />
-        <CheckItemText3 />
-        <CheckItemText4 />
-      </div>
-    </div>
-  );
-}
-
-function TextPadding5() {
-  return (
-    <div className="content-stretch flex items-center justify-center px-[2px] relative shrink-0" data-name="Text padding">
-      <p className="font-['Geist:semibold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#3f3f46] text-[16px] whitespace-nowrap">Start free</p>
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Footer">
-      <div className="content-stretch flex flex-col items-start p-[24px] relative w-full">
-        <div className="bg-white h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Button">
-          <div className="flex flex-row items-center justify-center overflow-clip rounded-[inherit] size-full">
-            <div className="content-stretch flex items-center justify-center pl-[12px] pr-[18px] py-[8px] relative size-full">
-              <TextPadding5 />
-            </div>
-          </div>
-          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]" />
-          <div aria-hidden="true" className="absolute border border-[#d5d7da] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)]" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PricingCard() {
-  return (
-    <div className="bg-white col-1 content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-1 self-stretch shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0" data-name="Pricing card">
-      <Content4 />
-      <CheckItems />
-      <Footer />
-    </div>
-  );
-}
-
-function MainText1() {
-  return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start leading-[1.5] relative shrink-0 w-full" data-name="Main text">
-      <p className="font-['Geist:semibold',sans-serif] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">Explorer</p>
-      <p className="font-['Geist:regular',sans-serif] relative shrink-0 text-[#70707b] text-[16px] w-full">Great for getting started with scalable outreach.</p>
-    </div>
-  );
-}
-
-function Price1() {
-  return (
-    <div className="content-stretch flex font-['Geist:semibold',sans-serif] items-baseline relative shrink-0 whitespace-nowrap" data-name="Price">
-      <p className="leading-[1.3] relative shrink-0 text-[#111] text-[44px] tracking-[-2px]">$49</p>
-      <p className="leading-[1.5] relative shrink-0 text-[#a0a0ab] text-[20px]">/mo</p>
-    </div>
-  );
-}
-
-function Content5() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Content">
-      <div aria-hidden="true" className="absolute border-[#f4f4f5] border-b border-solid inset-0 pointer-events-none" />
-      <div className="content-stretch flex flex-col gap-[16px] items-start not-italic p-[24px] relative w-full">
-        <MainText1 />
-        <Price1 />
-      </div>
-    </div>
-  );
-}
-
-function Frame9() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p5c05eb0} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap5() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame9 />
-    </div>
-  );
-}
-
-function CheckItemText5() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap5 />
-      <p className="flex-[1_0_0] font-['Geist:medium',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#18181b] text-[16px]">Expect 1–2 customers back</p>
-    </div>
-  );
-}
-
-function Frame10() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap6() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame10 />
-    </div>
-  );
-}
-
-function CheckItemText6() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap6 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Send up to 100 videos per month</p>
-    </div>
-  );
-}
-
-function Frame11() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap7() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame11 />
-    </div>
-  );
-}
-
-function CheckItemText7() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap7 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">$0.75 per video over the limit</p>
-    </div>
-  );
-}
-
-function Frame12() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap8() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame12 />
-    </div>
-  );
-}
-
-function CheckItemText8() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap8 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Customize 2 variables</p>
-    </div>
-  );
-}
-
-function Frame13() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap9() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame13 />
-    </div>
-  );
-}
-
-function CheckItemText9() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap9 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Auto-play thumbnails in inbox</p>
-    </div>
-  );
-}
-
-function Frame14() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap10() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame14 />
-    </div>
-  );
-}
-
-function CheckItemText10() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap10 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Support via email</p>
-    </div>
-  );
-}
-
-function CheckItems1() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Check items">
-      <div aria-hidden="true" className="absolute border-[#f4f4f5] border-b border-solid inset-0 pointer-events-none" />
-      <div className="content-stretch flex flex-col gap-[12px] items-start p-[24px] relative w-full">
-        <CheckItemText5 />
-        <CheckItemText6 />
-        <CheckItemText7 />
-        <CheckItemText8 />
-        <CheckItemText9 />
-        <CheckItemText10 />
-      </div>
-    </div>
-  );
-}
-
-function TextPadding6() {
-  return (
-    <div className="content-stretch flex items-center justify-center px-[2px] relative shrink-0" data-name="Text padding">
-      <p className="font-['Geist:semibold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#fcfcfc] text-[16px] whitespace-nowrap">Choose Plan</p>
-    </div>
-  );
-}
-
-function Footer1() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Footer">
-      <div className="content-stretch flex flex-col items-start p-[24px] relative w-full">
-        <div className="bg-[#2952e8] h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Button">
-          <div className="flex flex-row items-center justify-center overflow-clip rounded-[inherit] size-full">
-            <div className="content-stretch flex items-center justify-center px-[12px] py-[8px] relative size-full">
-              <TextPadding6 />
-            </div>
-          </div>
-          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]" />
-          <div aria-hidden="true" className="absolute border-2 border-[rgba(255,255,255,0.12)] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)]" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PricingCard1() {
-  return (
-    <div className="bg-white col-2 content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-1 self-start shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0" data-name="Pricing card">
-      <Content5 />
-      <CheckItems1 />
-      <Footer1 />
-    </div>
-  );
-}
-
-function MainText2() {
-  return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start leading-[1.5] relative shrink-0 w-full" data-name="Main text">
-      <p className="font-['Geist:semibold',sans-serif] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">Rainmaker</p>
-      <p className="font-['Geist:regular',sans-serif] relative shrink-0 text-[#70707b] text-[16px] w-full">Ideal for growing outreach with higher volume.</p>
-    </div>
-  );
-}
-
-function Price2() {
-  return (
-    <div className="content-stretch flex font-['Geist:semibold',sans-serif] items-baseline relative shrink-0 whitespace-nowrap" data-name="Price">
-      <p className="leading-[1.3] relative shrink-0 text-[#111] text-[44px] tracking-[-2px]">$149</p>
-      <p className="leading-[1.5] relative shrink-0 text-[#a0a0ab] text-[20px]">/mo</p>
-    </div>
-  );
-}
-
-function Content6() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Content">
-      <div aria-hidden="true" className="absolute border-[#f4f4f5] border-b border-solid inset-0 pointer-events-none" />
-      <div className="content-stretch flex flex-col gap-[16px] items-start not-italic p-[24px] relative w-full">
-        <MainText2 />
-        <Price2 />
-      </div>
-    </div>
-  );
-}
-
-function Frame15() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p5c05eb0} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap11() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame15 />
-    </div>
-  );
-}
-
-function CheckItemText11() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap11 />
-      <p className="flex-[1_0_0] font-['Geist:medium',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#18181b] text-[16px]">Expect 4-5 customers back</p>
-    </div>
-  );
-}
-
-function Frame16() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap12() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame16 />
-    </div>
-  );
-}
-
-function CheckItemText12() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap12 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Send up to 400 videos per month</p>
-    </div>
-  );
-}
-
-function Frame17() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap13() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame17 />
-    </div>
-  );
-}
-
-function CheckItemText13() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap13 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">$0.60 per extra video</p>
-    </div>
-  );
-}
-
-function Frame18() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap14() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame18 />
-    </div>
-  );
-}
-
-function CheckItemText14() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap14 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">{`Customize 2 variables `}</p>
-    </div>
-  );
-}
-
-function Frame19() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap15() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame19 />
-    </div>
-  );
-}
-
-function CheckItemText15() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap15 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Auto-play thumbnails in inbox</p>
-    </div>
-  );
-}
-
-function Frame20() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap16() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame20 />
-    </div>
-  );
-}
-
-function CheckItemText16() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap16 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Dedicated onboarding</p>
-    </div>
-  );
-}
-
-function CheckItems2() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Check items">
-      <div aria-hidden="true" className="absolute border-[#f4f4f5] border-b border-solid inset-0 pointer-events-none" />
-      <div className="content-stretch flex flex-col gap-[12px] items-start p-[24px] relative w-full">
-        <CheckItemText11 />
-        <CheckItemText12 />
-        <CheckItemText13 />
-        <CheckItemText14 />
-        <CheckItemText15 />
-        <CheckItemText16 />
-      </div>
-    </div>
-  );
-}
-
-function TextPadding7() {
-  return (
-    <div className="content-stretch flex items-center justify-center px-[2px] relative shrink-0" data-name="Text padding">
-      <p className="font-['Geist:semibold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#fcfcfc] text-[16px] whitespace-nowrap">Choose Plan</p>
-    </div>
-  );
-}
-
-function Footer2() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Footer">
-      <div className="content-stretch flex flex-col items-start p-[24px] relative w-full">
-        <div className="bg-[#2952e8] h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Button">
-          <div className="flex flex-row items-center justify-center overflow-clip rounded-[inherit] size-full">
-            <div className="content-stretch flex items-center justify-center px-[12px] py-[8px] relative size-full">
-              <TextPadding7 />
-            </div>
-          </div>
-          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]" />
-          <div aria-hidden="true" className="absolute border-2 border-[rgba(255,255,255,0.12)] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)]" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Frame27() {
-  return (
-    <div className="absolute bg-[#2952e8] content-stretch flex items-center justify-center pb-[3px] pt-[4px] px-[12px] right-0 rounded-bl-[12px] rounded-tr-[12px] top-0">
-      <p className="font-['Geist:semibold',sans-serif] leading-[1.5] not-italic relative shrink-0 text-[#fafafa] text-[14px] uppercase whitespace-nowrap">MOST POPULAR</p>
-    </div>
-  );
-}
-
-function PricingCard2() {
-  return (
-    <div className="bg-white col-1 content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-2 self-start shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0" data-name="Pricing card">
-      <Content6 />
-      <CheckItems2 />
-      <Footer2 />
-      <Frame27 />
-    </div>
-  );
-}
-
-function MainText3() {
-  return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start leading-[1.5] relative shrink-0 w-full" data-name="Main text">
-      <p className="font-['Geist:semibold',sans-serif] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">Titan</p>
-      <p className="font-['Geist:regular',sans-serif] relative shrink-0 text-[#70707b] text-[16px] w-full">Best for power users needing maximum reach.</p>
-    </div>
-  );
-}
-
-function Price3() {
-  return (
-    <div className="content-stretch flex font-['Geist:semibold',sans-serif] items-baseline relative shrink-0 whitespace-nowrap" data-name="Price">
-      <p className="leading-[1.3] relative shrink-0 text-[#111] text-[44px] tracking-[-2px]">$399</p>
-      <p className="leading-[1.5] relative shrink-0 text-[#a0a0ab] text-[20px]">/mo</p>
-    </div>
-  );
-}
-
-function Content7() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Content">
-      <div aria-hidden="true" className="absolute border-[#f4f4f5] border-b border-solid inset-0 pointer-events-none" />
-      <div className="content-stretch flex flex-col gap-[16px] items-start not-italic p-[24px] relative w-full">
-        <MainText3 />
-        <Price3 />
-      </div>
-    </div>
-  );
-}
-
-function Frame21() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p5c05eb0} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap17() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame21 />
-    </div>
-  );
-}
-
-function CheckItemText17() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap17 />
-      <p className="flex-[1_0_0] font-['Geist:medium',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#18181b] text-[16px]">Expect 4-5 customers back</p>
-    </div>
-  );
-}
-
-function Frame22() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap18() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame22 />
-    </div>
-  );
-}
-
-function CheckItemText18() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap18 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Send up to 1500 videos per month</p>
-    </div>
-  );
-}
-
-function Frame23() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap19() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame23 />
-    </div>
-  );
-}
-
-function CheckItemText19() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap19 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">$0.50 per extra video</p>
-    </div>
-  );
-}
-
-function Frame24() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap20() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame24 />
-    </div>
-  );
-}
-
-function CheckItemText20() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap20 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Customize 2 variables</p>
-    </div>
-  );
-}
-
-function Frame25() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap21() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame25 />
-    </div>
-  );
-}
-
-function CheckItemText21() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap21 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Auto-play thumbnails in inbox</p>
-    </div>
-  );
-}
-
-function Frame26() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="Frame">
-      <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="Frame">
-          <path d={svgPaths.p31ccbc00} fill="var(--fill-0, #2952E8)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Wrap22() {
-  return (
-    <div className="content-stretch flex items-center p-[4px] relative shrink-0 size-[24px]" data-name="wrap">
-      <Frame26 />
-    </div>
-  );
-}
-
-function CheckItemText22() {
-  return (
-    <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Check item text">
-      <Wrap22 />
-      <p className="flex-[1_0_0] font-['Geist:regular',sans-serif] leading-[1.5] min-h-px min-w-px not-italic relative text-[#70707b] text-[16px]">Dedicated onboarding</p>
-    </div>
-  );
-}
-
-function CheckItems3() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Check items">
-      <div aria-hidden="true" className="absolute border-[#f4f4f5] border-b border-solid inset-0 pointer-events-none" />
-      <div className="content-stretch flex flex-col gap-[12px] items-start p-[24px] relative w-full">
-        <CheckItemText17 />
-        <CheckItemText18 />
-        <CheckItemText19 />
-        <CheckItemText20 />
-        <CheckItemText21 />
-        <CheckItemText22 />
-      </div>
-    </div>
-  );
-}
-
-function TextPadding8() {
-  return (
-    <div className="content-stretch flex items-center justify-center px-[2px] relative shrink-0" data-name="Text padding">
-      <p className="font-['Geist:semibold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#fcfcfc] text-[16px] whitespace-nowrap">Choose Plan</p>
-    </div>
-  );
-}
-
-function Footer3() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Footer">
-      <div className="content-stretch flex flex-col items-start p-[24px] relative w-full">
-        <div className="bg-[#2952e8] h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Button">
-          <div className="flex flex-row items-center justify-center overflow-clip rounded-[inherit] size-full">
-            <div className="content-stretch flex items-center justify-center px-[12px] py-[8px] relative size-full">
-              <TextPadding8 />
-            </div>
-          </div>
-          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]" />
-          <div aria-hidden="true" className="absolute border-2 border-[rgba(255,255,255,0.12)] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)]" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PricingCard3() {
-  return (
-    <div className="bg-white col-2 content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-2 self-start shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0" data-name="Pricing card">
-      <Content7 />
-      <CheckItems3 />
-      <Footer3 />
-    </div>
-  );
-}
-
-function CardsWrap() {
+function CardsWrap({ plans }: { plans: PricingPlan[] }) {
   return (
     <div className="gap-x-[12px] gap-y-[12px] grid grid-cols-[repeat(2,minmax(0,1fr))] grid-rows-[repeat(2,minmax(0,1fr))] h-[1105px] relative shrink-0 w-full" data-name="cards wrap">
-      <PricingCard />
-      <PricingCard1 />
-      <PricingCard2 />
-      <PricingCard3 />
+      <PricingPlanCard
+        className="bg-white col-1 content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-1 self-stretch shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0"
+        featureContainerClassName="flex-[1_0_0] min-h-px min-w-px relative w-full"
+        meta={PRICING_CARD_META[0]}
+        plan={plans[0]}
+      />
+      <PricingPlanCard
+        className="bg-white col-2 content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-1 self-start shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0"
+        featureContainerClassName="relative shrink-0 w-full"
+        meta={PRICING_CARD_META[1]}
+        plan={plans[1]}
+      />
+      <PricingPlanCard
+        className="bg-white col-1 content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-2 self-start shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0"
+        featureContainerClassName="relative shrink-0 w-full"
+        meta={PRICING_CARD_META[2]}
+        plan={plans[2]}
+      />
+      <PricingPlanCard
+        className="bg-white col-2 content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-2 self-start shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0"
+        featureContainerClassName="relative shrink-0 w-full"
+        meta={PRICING_CARD_META[3]}
+        plan={plans[3]}
+      />
     </div>
   );
 }
@@ -3464,14 +2459,16 @@ function Frame69() {
   );
 }
 
-function Container11() {
+function Container11({ pricingMode, onPricingModeChange }: LayoutProps) {
+  const plans = PRICING_PLANS[pricingMode ?? "yearly"];
+
   return (
     <div className="max-w-[1240px] relative shrink-0 w-full" data-name="container">
       <div className="flex flex-col items-center max-w-[inherit] size-full">
         <div className="content-stretch flex flex-col gap-[32px] items-center max-w-[inherit] px-[32px] relative w-full">
           <TopText />
-          <MonthlyYearlyToggle />
-          <CardsWrap />
+          <MonthlyYearlyToggle onPricingModeChange={onPricingModeChange} pricingMode={pricingMode} />
+          <CardsWrap plans={plans} />
           <Frame69 />
         </div>
       </div>
@@ -3479,10 +2476,10 @@ function Container11() {
   );
 }
 
-function Pricing() {
+function Pricing({ pricingMode, onPricingModeChange }: LayoutProps) {
   return (
-    <div className="bg-[#eff4ff] content-stretch flex flex-col items-center overflow-clip py-[88px] relative shrink-0 w-full z-[3]" data-name="Pricing">
-      <Container11 />
+    <div className="bg-[#eff4ff] content-stretch flex flex-col items-center overflow-clip py-[88px] relative shrink-0 w-full z-[3]" data-name="Pricing" id="pricing">
+      <Container11 onPricingModeChange={onPricingModeChange} pricingMode={pricingMode} />
     </div>
   );
 }
@@ -3571,7 +2568,7 @@ function MainCta() {
     <div className="bg-[#2952e8] col-1 h-[360px] justify-self-stretch relative rounded-[16px] row-1 self-start shrink-0" data-name="main cta">
       <div className="content-stretch flex flex-col items-start justify-between p-[32px] relative size-full">
         <TextWrap1 />
-        <div className="bg-white content-stretch flex items-center justify-center px-[18px] py-[8px] relative rounded-[8px] shrink-0" data-name="Button">
+        <div className="bg-white content-stretch flex items-center justify-center px-[18px] py-[8px] relative rounded-[8px] shrink-0" data-action="open-login-modal" data-login-mode="signup" data-name="Button">
           <div aria-hidden="true" className="absolute border border-[#e4e4e7] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)]" />
           <TextPadding10 />
           <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_0px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]" />
@@ -3610,42 +2607,16 @@ function Cta() {
   );
 }
 
-function Column() {
-  return (
-    <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-[84px]" data-name="column">
-      <p className="relative shrink-0 text-[#a0a0ab] w-full">ABOUT</p>
-      <p className="relative shrink-0 text-[#fafafa] w-full">How it works</p>
-      <p className="relative shrink-0 text-[#fafafa] w-full">Pricing</p>
-    </div>
-  );
-}
-
-function Column1() {
-  return (
-    <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-[48px]" data-name="column">
-      <p className="relative shrink-0 text-[#a0a0ab] w-full">LEGAL</p>
-      <p className="relative shrink-0 text-[#fafafa] w-full">Privacy</p>
-      <p className="relative shrink-0 text-[#fafafa] w-full">{`Terms `}</p>
-    </div>
-  );
-}
-
-function Column2() {
-  return (
-    <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-[135px]" data-name="column">
-      <p className="relative shrink-0 text-[#a0a0ab] w-full">CONTACT</p>
-      <p className="relative shrink-0 text-[#fafafa] w-full">hello@promoflix.com</p>
-    </div>
-  );
-}
-
 function FooterLinks() {
   return (
-    <div className="col-[2/span_2] content-stretch flex font-['Geist:regular',sans-serif] items-start justify-between justify-self-stretch leading-[1.5] not-italic relative row-1 self-start shrink-0 text-[14px]" data-name="footer links">
-      <Column />
-      <Column1 />
-      <Column2 />
-    </div>
+    <FooterLinkColumns
+      className="col-[2/span_2] content-stretch flex font-['Geist:regular',sans-serif] items-start justify-between justify-self-stretch leading-[1.5] not-italic relative row-1 self-start shrink-0 text-[14px]"
+      columns={[
+        { title: 'ABOUT', links: ['How it works', 'Pricing'], className: 'content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-[84px]' },
+        { title: 'LEGAL', links: ['Privacy', 'Terms'], className: 'content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-[48px]' },
+        { title: 'CONTACT', links: ['hello@promoflix.com'], className: 'content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-[135px]' },
+      ]}
+    />
   );
 }
 
@@ -3746,32 +2717,6 @@ function MainContent() {
   );
 }
 
-function MaskGroup() {
-  return (
-    <div className="absolute contents inset-[0_0_-0.49%_0]" data-name="Mask group">
-      <div className="absolute inset-[0.27%_0.04%_-0.15%_0.01%] mask-intersect mask-luminance mask-no-clip mask-no-repeat mask-position-[-0.045px_-0.325px] mask-size-[704px_119.768px]" data-name="Vector" style={{ maskImage: `url('${imgVector}')` }}>
-        <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 703.655 119.041">
-          <path d={svgPaths.p1aa5d200} fill="url(#paint0_linear_1_5504)" id="Vector" />
-          <defs>
-            <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_1_5504" x1="339.1" x2="339.1" y1="121.78" y2="-2.66176">
-              <stop offset="0.134615" stopColor="#131316" />
-              <stop offset="1" stopColor="#A0A0AB" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-function PromoflixGradient() {
-  return (
-    <div className="absolute aspect-[969/164.04647827148438] bottom-[0.25px] left-[32px] overflow-clip right-[32px] z-[1]" data-name="Promoflix gradient">
-      <MaskGroup />
-    </div>
-  );
-}
-
 function Container13() {
   return (
     <div className="bg-[#131316] h-[288px] relative rounded-[32px] shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0 w-full" data-name="container">
@@ -3779,7 +2724,7 @@ function Container13() {
         <div className="content-stretch flex flex-col isolate items-center justify-between pb-[12px] px-[32px] relative size-full">
           <MainContent />
           <p className="font-['Geist:regular',sans-serif] leading-[1.5] not-italic relative shrink-0 text-[#a0a0ab] text-[14px] whitespace-nowrap z-[2]">© 2026 Promoflix. All rights reserved.</p>
-          <PromoflixGradient />
+          <FooterPromoflixGradient className="absolute bottom-[-52px] left-px right-0 aspect-[1238.39/209.505] overflow-clip z-[1]" />
         </div>
       </div>
     </div>
@@ -3788,13 +2733,13 @@ function Container13() {
 
 function Footer4() {
   return (
-    <div className="bg-[#131316] content-stretch flex flex-col items-center max-w-[1240px] overflow-clip pt-[80px] relative shrink-0 w-full z-[1]" data-name="Footer">
+    <div className="bg-[#131316] content-stretch flex flex-col items-center overflow-clip pt-[80px] px-[32px] relative shrink-0 w-full z-[1]" data-name="Footer">
       <Container13 />
     </div>
   );
 }
 
-export default function Component() {
+export default function Component({ pricingMode = 'yearly', onPricingModeChange }: LayoutProps) {
   return (
     <div className="content-stretch flex flex-col isolate items-center relative size-full" data-name="768">
       <div className="absolute bottom-0 h-[7898.294921875px] left-1/2 pointer-events-none top-[16px]">
@@ -3813,7 +2758,7 @@ export default function Component() {
       <HowTeamsUsePromoflix />
       <ByTheNumbers />
       <Testimonials />
-      <Pricing />
+      <Pricing onPricingModeChange={onPricingModeChange} pricingMode={pricingMode} />
       <Cta />
       <Footer4 />
     </div>

@@ -190,6 +190,12 @@ body,
   overflow-x: hidden;
 }
 
+[data-action],
+[data-name="Button"],
+[data-name*="Button"] {
+  cursor: pointer;
+}
+
 /* Interactive Animations */
 @keyframes ripple {
   0% {
@@ -211,6 +217,20 @@ body,
     transform: translate(var(--tx), var(--ty)) scale(0);
     opacity: 0;
   }
+}
+
+@keyframes client-logo-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(calc(-50% - 12px), 0, 0);
+  }
+}
+
+.client-logo-marquee-track {
+  animation: client-logo-marquee 34s linear infinite;
+  will-change: transform;
 }
 
 @keyframes float {
