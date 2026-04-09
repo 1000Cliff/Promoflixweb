@@ -177,7 +177,7 @@ function Frame48() {
   return (
     <div className="content-stretch flex flex-col gap-[16px] items-start not-italic relative shrink-0 w-full">
       <p className="font-['Geist:semibold',sans-serif] leading-[1.1] min-w-full relative shrink-0 text-[#18181b] text-[54px] tracking-[-1.08px] w-[min-content]">Turn one video into thousands of personal conversations</p>
-      <p className="font-['Geist:regular',sans-serif] leading-[1.5] relative shrink-0 text-[#70707b] text-[20px] w-[578px]">Promoflix helps sales and marketing teams send personalized video outreach that actually gets replies without recording over and over again.</p>
+      <p className="font-['Geist:regular',sans-serif] leading-[1.5] relative shrink-0 text-[#18181b] text-[20px] w-[578px]">PromoFlix turns personalized video outreach into a scalable, automated workflow — boosting response rates by 3x.</p>
     </div>
   );
 }
@@ -659,7 +659,7 @@ function Frame53() {
 
   return (
     <div className="content-stretch flex flex-col gap-[48px] items-center relative shrink-0">
-      <p className="font-['Geist:semibold',sans-serif] leading-[1.5] not-italic relative shrink-0 text-[20px] text-black whitespace-nowrap">Our clients trust us</p>
+      <p className="font-['Geist:semibold',sans-serif] leading-[1.5] not-italic relative shrink-0 text-[20px] text-black whitespace-nowrap">These Companies Trust Promoflix</p>
       <div className="overflow-hidden relative shrink-0 w-[1240px]" data-name="Client logos marquee">
         <div className="client-logo-marquee-track flex gap-[24px] items-center w-max">
           {marqueeLogos.map((logo, index) => (
@@ -872,8 +872,18 @@ function Frame54() {
 
 function Content() {
   return (
-    <div className="content-stretch flex items-center justify-center relative shrink-0 w-full" data-name="Content">
+    <div className="content-stretch flex items-center justify-between relative shrink-0 w-full" data-name="Content">
       <p className="font-['Geist:semibold',sans-serif] leading-[1.3] not-italic relative shrink-0 text-[#18181b] text-[20px] tracking-[-1px] whitespace-nowrap">You should not have to choose between scale and being human</p>
+      <div
+        className="bg-[#1d4ed8] relative rounded-[8px] shrink-0"
+        data-action="scroll-to-section"
+        data-name="Button"
+        data-section-target="pricing"
+      >
+        <div className="content-stretch flex items-center justify-center overflow-clip px-[18px] py-[12px] relative rounded-[inherit] w-full">
+          <p className="font-['Geist:semibold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[16px] text-white whitespace-nowrap">Choose Promoflix</p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -987,7 +997,7 @@ function TableCell1() {
 function TextAndSupportingText2() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Text and supporting text">
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[21.711px] not-italic relative shrink-0 text-[#535862] text-[15.198px] whitespace-nowrap">anna@gmail.com</p>
+      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[21.711px] not-italic relative shrink-0 text-[#535862] text-[15.198px] whitespace-nowrap">bethn@gmail.com</p>
     </div>
   );
 }
@@ -1053,7 +1063,7 @@ function TableCell4() {
 function TextAndSupportingText5() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Text and supporting text">
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[21.711px] not-italic relative shrink-0 text-[#535862] text-[15.198px] whitespace-nowrap">anna@gmail.com</p>
+      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[21.711px] not-italic relative shrink-0 text-[#535862] text-[15.198px] whitespace-nowrap">annajones@fastmail.com</p>
     </div>
   );
 }
@@ -1119,7 +1129,7 @@ function TableCell7() {
 function TextAndSupportingText8() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Text and supporting text">
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[21.711px] not-italic relative shrink-0 text-[#535862] text-[15.198px] whitespace-nowrap">alexki@gmail.com</p>
+      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[21.711px] not-italic relative shrink-0 text-[#535862] text-[15.198px] whitespace-nowrap">alexki@kihomes.com</p>
     </div>
   );
 }
@@ -1185,7 +1195,7 @@ function TableCell10() {
 function TextAndSupportingText11() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Text and supporting text">
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[21.711px] not-italic relative shrink-0 text-[#535862] text-[15.198px] whitespace-nowrap">mkelly@gmail.com</p>
+      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[21.711px] not-italic relative shrink-0 text-[#535862] text-[15.198px] whitespace-nowrap">john821@proton.me</p>
     </div>
   );
 }
@@ -1230,7 +1240,7 @@ function Img() {
 function Top() {
   return (
     <div className="content-stretch flex flex-col font-['Geist:semibold',sans-serif] gap-[4px] items-start relative shrink-0 w-full" data-name="top">
-      <p className="leading-[1.5] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">01</p>
+      <p className="leading-[1.5] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">02</p>
       <p className="leading-[1.3] relative shrink-0 text-[#18181b] text-[20px] tracking-[-1px] w-full">Upload your contacts</p>
     </div>
   );
@@ -1400,8 +1410,8 @@ function Img1() {
 function Top1() {
   return (
     <div className="content-stretch flex flex-col font-['Geist:semibold',sans-serif] gap-[4px] items-start relative shrink-0 w-full" data-name="top">
-      <p className="leading-[1.5] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">02</p>
-      <p className="leading-[1.3] relative shrink-0 text-[#18181b] text-[20px] tracking-[-1px] w-full">Upload your video</p>
+      <p className="leading-[1.5] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">01</p>
+      <p className="leading-[1.3] relative shrink-0 text-[#18181b] text-[20px] tracking-[-1px] w-full">Upload Video</p>
     </div>
   );
 }
@@ -1411,7 +1421,7 @@ function Text2() {
     <div className="relative shrink-0 w-full" data-name="Text">
       <div className="content-stretch flex flex-col gap-[8px] items-start not-italic p-[24px] relative w-full">
         <Top1 />
-        <p className="font-['Geist:regular',sans-serif] h-[48px] leading-[1.5] overflow-hidden relative shrink-0 text-[#70707b] text-[16px] text-ellipsis w-full">Record or upload a short sales video once. Promoflix will personalize it for every recipient.</p>
+        <p className="font-['Geist:regular',sans-serif] h-[72px] leading-[1.5] overflow-hidden relative shrink-0 text-[#70707b] text-[16px] text-ellipsis w-full">Record or upload a short sales video once. Promoflix will personalize it for every recipient using AI voice synthesis and lip sync technology.</p>
       </div>
     </div>
   );
@@ -1504,7 +1514,7 @@ function Text3() {
     <div className="relative shrink-0 w-full" data-name="Text">
       <div className="content-stretch flex flex-col gap-[8px] items-start not-italic p-[24px] relative w-full">
         <Top2 />
-        <p className="font-['Geist:regular',sans-serif] h-[47px] leading-[1.5] overflow-hidden relative shrink-0 text-[#70707b] text-[16px] text-ellipsis w-full">Highlight words like the person’s name or city. We’ll automatically swap them for each recipient.</p>
+        <p className="font-['Geist:regular',sans-serif] h-[47px] leading-[1.5] overflow-hidden relative shrink-0 text-[#70707b] text-[16px] text-ellipsis w-full">Highlight words like the person’s name or city. We’ll automatically enhance the videos to match each recipient.</p>
       </div>
     </div>
   );
@@ -1664,7 +1674,7 @@ function Top3() {
   return (
     <div className="content-stretch flex flex-col font-['Geist:semibold',sans-serif] gap-[4px] items-start relative shrink-0 w-full" data-name="top">
       <p className="leading-[1.5] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">04</p>
-      <p className="leading-[1.3] relative shrink-0 text-[#18181b] text-[20px] tracking-[-1px] w-full">Write once, reach all</p>
+      <p className="leading-[1.3] relative shrink-0 text-[#18181b] text-[20px] tracking-[-1px] w-full">Record &amp; Write Once, Personalize for All</p>
     </div>
   );
 }
@@ -1674,7 +1684,7 @@ function Text4() {
     <div className="relative shrink-0 w-full" data-name="Text">
       <div className="content-stretch flex flex-col gap-[8px] items-start not-italic p-[24px] relative w-full">
         <Top3 />
-        <p className="font-['Geist:regular',sans-serif] h-[47px] leading-[1.5] overflow-hidden relative shrink-0 text-[#70707b] text-[16px] text-ellipsis w-full">Compose your message and send personalized videos by email, text, or LinkedIn - all in one go.</p>
+        <p className="font-['Geist:regular',sans-serif] h-[72px] leading-[1.5] overflow-hidden relative shrink-0 text-[#70707b] text-[16px] text-ellipsis w-full">Compose your message and send personalized videos by email, LinkedIn, or text. It’s that easy with Promoflix!</p>
       </div>
     </div>
   );
@@ -1692,8 +1702,8 @@ function Card4() {
 function Frame98() {
   return (
     <div className="content-stretch flex gap-[12px] items-start relative shrink-0 w-full">
-      <Card1 />
       <Card2 />
+      <Card1 />
       <Card3 />
       <Card4 />
     </div>
@@ -2472,7 +2482,7 @@ function Frame45() {
   return (
     <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full">
       <p className="font-['Geist:semibold',sans-serif] leading-[1.5] not-italic relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">BY THE NUMBERS</p>
-      <p className="font-['Geist:SemiBold',sans-serif] font-semibold leading-[1.3] relative shrink-0 text-[#18181b] text-[44px] tracking-[-2px] w-full">Small lifts Massive impact</p>
+      <p className="font-['Geist:SemiBold',sans-serif] font-semibold leading-[1.3] relative shrink-0 text-[#18181b] text-[44px] tracking-[-2px] w-full">Small lifts, Massive impact</p>
     </div>
   );
 }
@@ -2499,7 +2509,7 @@ function TextColumn() {
 function Frame31() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-      <p className="font-['Geist:semibold',sans-serif] leading-[1.5] not-italic relative shrink-0 text-[#18181b] text-[20px] w-full whitespace-pre-wrap">{`Engagement  `}</p>
+      <p className="font-['Geist:semibold',sans-serif] leading-[1.5] not-italic relative shrink-0 text-[#18181b] text-[20px] w-full whitespace-pre-wrap">{`Response Rate  `}</p>
     </div>
   );
 }
@@ -2585,7 +2595,6 @@ function ByTheNumbers() {
 function Frame46() {
   return (
     <div className="content-stretch flex flex-col font-['Geist:semibold',sans-serif] gap-[4px] items-start relative shrink-0 w-full">
-      <p className="leading-[1.5] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">Testimonials</p>
       <p className="leading-[1.3] relative shrink-0 text-[#18181b] text-[44px] tracking-[-2px] w-full">What our clients say</p>
     </div>
   );
@@ -2595,7 +2604,7 @@ function Top5() {
   return (
     <div className="content-stretch flex flex-col gap-[8px] items-center max-w-[560px] not-italic relative shrink-0 text-center w-full" data-name="top">
       <Frame46 />
-      <p className="font-['Geist:regular',sans-serif] leading-[1.5] relative shrink-0 text-[#70707b] text-[20px] w-full">Real stories from brands that use Promoflix.AI to scale faster and achieve measurable results.</p>
+      <p className="font-['Geist:regular',sans-serif] leading-[1.5] relative shrink-0 text-[#70707b] text-[20px] w-full">Real stories from businesses that use Promoflix.AI to scale faster and achieve measurable results.</p>
     </div>
   );
 }

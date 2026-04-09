@@ -6,19 +6,32 @@ const Layout1440 = lazy(() => import('../designs/Layout1440'));
 const Layout1024 = lazy(() => import('../designs/Layout1024'));
 const Layout768 = lazy(() => import('../designs/Layout768'));
 const Layout375 = lazy(() => import('../designs/Layout375'));
+const LeadCaptureModal = lazy(async () => {
+  const module = await import('./LeadCaptureModal');
+  return { default: module.LeadCaptureModal };
+});
 
 const INTERACTIVE_SELECTOR = '[data-action], [data-name="Button"], [data-name*="Button"], button, a, [role="button"]';
+const PRICING_CTA_LABELS = new Set(['Try it free', 'Try for free', 'Try for free →', 'Start free', 'Start free →', 'Choose Plan', 'Choose Promoflix']);
+const EXAMPLE_CTA_LABELS = new Set(['Send me example', 'Send real example', 'See real example', 'Get a real example']);
 const LOGIN_URL = 'https://app.promoflix.ai/auth/login';
 const SIGNUP_URL = 'https://app.promoflix.ai/auth/signup';
-const PLAN_URL = 'https://app.promoflix.ai/home/plan';
 
 export function PromoFlixLanding() {
   const width = useViewportWidth();
   const showScrollTop = useScrollTopVisibility(500);
   const [pricingMode, setPricingMode] = useState<PricingMode>('yearly');
+  const [showLeadCaptureModal, setShowLeadCaptureModal] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   const handleLandingClick = (event: MouseEvent<HTMLDivElement>) => {
@@ -35,22 +48,26 @@ export function PromoFlixLanding() {
     const { action, externalUrl, loginMode: nextLoginMode, sectionTarget } = interactiveTarget.dataset;
     const label = interactiveTarget.textContent?.replace(/\s+/g, ' ').trim() ?? '';
 
+    if (PRICING_CTA_LABELS.has(label)) {
+      event.preventDefault();
+      scrollToSection('pricing');
+      return;
+    }
+
+    if (EXAMPLE_CTA_LABELS.has(label)) {
+      event.preventDefault();
+      setShowLeadCaptureModal(true);
+      return;
+    }
+
     if (action === 'scroll-to-section' && sectionTarget) {
-      const section = document.getElementById(sectionTarget);
-      if (section) {
-        event.preventDefault();
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      event.preventDefault();
+      scrollToSection(sectionTarget);
       return;
     }
 
     if (action === 'open-login-modal') {
       event.preventDefault();
-      if (label === 'Choose Plan') {
-        window.location.assign(PLAN_URL);
-        return;
-      }
-
       window.location.assign(nextLoginMode === 'login' ? LOGIN_URL : SIGNUP_URL);
       return;
     }
@@ -62,7 +79,7 @@ export function PromoFlixLanding() {
     }
     if (label === 'Choose Plan') {
       event.preventDefault();
-      window.location.assign(PLAN_URL);
+      scrollToSection('pricing');
     }
   };
 
@@ -86,6 +103,12 @@ export function PromoFlixLanding() {
             <path d="M12 19V5M5 12l7-7 7 7" />
           </svg>
         </button>
+      )}
+
+      {showLeadCaptureModal && (
+        <Suspense fallback={null}>
+          <LeadCaptureModal onClose={() => setShowLeadCaptureModal(false)} />
+        </Suspense>
       )}
     </div>
   );

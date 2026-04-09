@@ -357,31 +357,44 @@ a:hover:not(.no-hover) {
   overflow: visible;
 }
 
-.industries-unified-grid {
-  align-items: start;
+.industries-marquee-shell {
+  overflow: hidden;
+  width: 100%;
 }
 
-.industries-unified-card {
+@keyframes industries-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.industries-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 24px;
+  animation: industries-marquee 56s linear infinite;
+  will-change: transform;
+}
+
+.industries-marquee-card {
+  width: 296px;
+  flex: 0 0 296px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  min-height: 460px;
-  transition: opacity 180ms ease;
 }
 
-.industries-unified-card.is-transitioning {
-  opacity: 0.72;
-}
-
-.industries-unified-media {
+.industries-marquee-media {
   position: relative;
-  width: 100%;
-  height: 240px;
+  height: 248px;
   overflow: visible;
   padding: 22px 10px 10px 22px;
 }
 
-.industries-unified-image {
+.industries-marquee-image {
   position: absolute;
   display: block;
   top: 0;
@@ -396,121 +409,86 @@ a:hover:not(.no-hover) {
   background: #f4f4f5;
 }
 
-.industries-unified-stack {
+.industries-marquee-stack {
   position: absolute;
   inset: 0;
 }
 
-.industries-unified-image-back {
+.industries-marquee-image-back {
   transform: translate(-18px, 4px) rotate(-7deg) scale(0.93);
   opacity: 0.52;
   z-index: 1;
 }
 
-.industries-unified-image-middle {
+.industries-marquee-image-middle {
   transform: translate(-8px, 2px) rotate(-3.5deg) scale(0.965);
   opacity: 0.78;
   z-index: 2;
 }
 
-.industries-unified-image-front {
+.industries-marquee-image-front {
   transform: rotate(2deg);
   z-index: 3;
 }
 
-.industries-unified-play {
+.industries-marquee-play {
   position: absolute;
+  left: 50%;
   top: 50%;
-  left: calc(50% + 12px);
   z-index: 4;
   display: flex;
-  height: 32px;
-  width: 32px;
+  height: 42px;
+  width: 42px;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
-  color: #2952e8;
   transform: translate(-50%, -50%);
-  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.22);
+  color: #2952e8;
+  backdrop-filter: blur(12px);
 }
 
-.industries-unified-play-icon {
-  height: 35px;
-  width: 35px;
+.industries-marquee-play-icon {
+  height: 24px;
+  width: 24px;
   margin-left: 2px;
 }
 
-.industries-unified-image-front,
-.industries-unified-image-middle,
-.industries-unified-image-back {
-  display: block;
+.industries-marquee-image-front,
+.industries-marquee-image-middle,
+.industries-marquee-image-back {
   transition: transform 220ms ease, opacity 220ms ease;
 }
 
-.industries-unified-card > div:last-child {
-  min-height: 200px;
-}
-
-.industries-unified-card p:nth-child(2) {
-  min-height: 54px;
-}
-
-.industries-unified-card p:nth-child(3) {
-  min-height: 96px;
-}
-
-@media (max-width: 1023px) {
-  .industries-unified-card {
-    min-height: 430px;
-  }
-
-  .industries-unified-card > div:last-child {
-    min-height: 170px;
-  }
-}
-
 @media (max-width: 767px) {
-  .industries-unified-card {
-    min-height: 0;
+  .industries-marquee-track {
+    gap: 18px;
+    animation-duration: 42s;
   }
 
-  .industries-unified-media {
-    height: 220px;
+  .industries-marquee-card {
+    width: 248px;
+    flex-basis: 248px;
+  }
+
+  .industries-marquee-media {
+    height: 216px;
     padding: 18px 8px 8px 18px;
   }
 
-  .industries-unified-image {
+  .industries-marquee-image {
     left: 18px;
     width: calc(100% - 24px);
     height: calc(100% - 20px);
   }
 
-  .industries-unified-image-back {
+  .industries-marquee-image-back {
     transform: translate(-14px, 4px) rotate(-6deg) scale(0.93);
   }
 
-  .industries-unified-image-middle {
+  .industries-marquee-image-middle {
     transform: translate(-6px, 2px) rotate(-3deg) scale(0.965);
-  }
-
-  .industries-unified-play {
-    left: calc(50% + 10px);
-    height: 28px;
-    width: 28px;
-  }
-
-  .industries-unified-play-icon {
-    height: 22px;
-    width: 22px;
-  }
-
-  .industries-unified-card > div:last-child,
-  .industries-unified-card p:nth-child(2),
-  .industries-unified-card p:nth-child(3) {
-    min-height: 0;
   }
 }
 
@@ -655,6 +633,14 @@ a:hover:not(.no-hover) {
 [data-name="Pricing"] [data-name="Pricing card"] [data-name="Price"] p {
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+[data-name="By the numbers"] [data-name="Button"] {
+  display: none !important;
+}
+
+[data-name="By the numbers"] [data-name="card"] > div > div {
+  justify-content: flex-start !important;
 }
 
 [data-name="Testimonials"] [data-name="Container"]:last-child {

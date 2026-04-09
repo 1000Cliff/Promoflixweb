@@ -71,7 +71,7 @@ export const PRICING_CARD_META: PricingCardMeta[] = [
   },
   {
     features: [
-      'Expect 4-5 customers back',
+      'Expect 9-10 customers back',
       'Send up to 1500 videos per month',
       '$0.50 per extra video',
       'Customize 2 variables',
