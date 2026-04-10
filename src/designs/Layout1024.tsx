@@ -146,7 +146,7 @@ function NavWrap() {
 function Frame48() {
   return (
     <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
-      <p className="font-['Geist:SemiBold',sans-serif] font-semibold leading-[1.1] relative shrink-0 text-[#18181b] text-[48px] tracking-[-0.96px] w-full">Turn one video into thousands of personal conversations</p>
+      <p className="font-['Geist:SemiBold',sans-serif] font-semibold leading-[1.1] relative shrink-0 text-[#18181b] text-[48px] tracking-[-0.96px] w-full">Turn one video into hundreds of personal conversations</p>
       <p className="font-['Geist:regular',sans-serif] leading-[1.5] not-italic relative shrink-0 text-[#18181b] text-[20px] w-full">PromoFlix turns personalized video outreach into a scalable, automated workflow — boosting response rates by 3x.</p>
     </div>
   );
@@ -841,6 +841,34 @@ function Frame92() {
   );
 }
 
+function PreviewBadge() {
+  return (
+    <div className="absolute right-[14px] top-[14px] rounded-[999px] bg-[rgba(255,255,255,0.65)] px-[10px] py-[6px] backdrop-blur-[8px]">
+      <p className="font-['Geist:semibold',sans-serif] text-[12px] text-white whitespace-nowrap">Hi Chloe</p>
+    </div>
+  );
+}
+
+function PreviewTimer() {
+  return (
+    <div className="absolute bottom-[16px] left-1/2 flex -translate-x-1/2 items-center gap-[8px] rounded-[999px] bg-[rgba(24,24,27,0.58)] px-[12px] py-[7px] backdrop-blur-[8px]">
+      <div className="size-[12px] rounded-full border border-white bg-[#ef4444]" />
+      <p className="font-['Geist:semibold',sans-serif] text-[12px] text-white whitespace-nowrap">00.00.00</p>
+    </div>
+  );
+}
+
+function DashboardPreview() {
+  return (
+    <div className="absolute left-1/2 top-[18px] h-[206px] w-[304px] -translate-x-1/2 overflow-hidden rounded-[20px] bg-white shadow-[0px_18px_40px_rgba(15,23,42,0.16)]">
+      <img alt="" className="size-full object-cover" src={imgRectangle213} />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.08)_0%,rgba(15,23,42,0)_26%,rgba(15,23,42,0.18)_100%)]" />
+      <PreviewBadge />
+      <PreviewTimer />
+    </div>
+  );
+}
+
 function IconAndStatus() {
   return (
     <div className="content-stretch flex gap-[2.63px] items-center relative shrink-0" data-name="Icon and status">
@@ -877,7 +905,7 @@ function SupportingTextAndStatus() {
 function TextAndSupportingText12() {
   return (
     <div className="content-stretch flex flex-col gap-[1.315px] items-start relative shrink-0 w-full" data-name="Text and supporting text">
-      <p className="font-['Inter:Medium',sans-serif] font-medium leading-[13.15px] not-italic overflow-hidden relative shrink-0 text-[#414651] text-[9.205px] text-ellipsis w-full whitespace-nowrap">car-features.mp3</p>
+      <p className="font-['Inter:Medium',sans-serif] font-medium leading-[13.15px] not-italic overflow-hidden relative shrink-0 text-[#414651] text-[9.205px] text-ellipsis w-full whitespace-nowrap">car-features.mp4</p>
       <SupportingTextAndStatus />
     </div>
   );
@@ -933,8 +961,9 @@ function FileUploadItemBase() {
 function Img1() {
   return (
     <div className="h-[286px] overflow-clip relative shrink-0 w-full" data-name="img">
-      <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[#dce7fd] border border-[#6397f7] border-dashed h-[195px] left-[calc(50%+9px)] rounded-[8px] top-[calc(50%-4.5px)] w-[228px]" />
-      <div className="-translate-x-1/2 -translate-y-1/2 absolute flex h-[205.301px] items-center justify-center left-[calc(50%-0.56px)] top-[calc(50%+0.5px)] w-[232.908px]" style={{ "--transform-inner-width": "1200", "--transform-inner-height": "152" } as React.CSSProperties}>
+      <div className="-translate-x-1/2 absolute border border-[#6397f7] border-dashed bottom-[22px] h-[230px] left-1/2 rounded-[20px] top-[18px] w-[328px]" />
+      <DashboardPreview />
+      <div className="absolute bottom-[18px] right-[52px] flex h-[205.301px] items-center justify-center w-[232.908px]" style={{ "--transform-inner-width": "1200", "--transform-inner-height": "152" } as React.CSSProperties}>
         <div className="flex-none rotate-[2.69deg]">
           <FileUploadItemBase />
         </div>
