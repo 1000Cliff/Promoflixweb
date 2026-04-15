@@ -60,8 +60,8 @@ export function PricingPlanCard({ plan, meta, className, featureContainerClassNa
         <div className="content-stretch flex flex-col items-start p-[24px] relative w-full">
           <div
             className={isPrimary ? 'bg-[#2952e8] h-[48px] relative rounded-[8px] shrink-0 w-full' : 'bg-white h-[48px] relative rounded-[8px] shrink-0 w-full'}
-            data-action="open-login-modal"
-            data-login-mode="signup"
+            data-action="open-external-url"
+            data-external-url={meta.ctaUrl}
             data-name="Button"
           >
             <div className="flex flex-row items-center justify-center overflow-clip rounded-[inherit] size-full">

@@ -11,37 +11,25 @@ export type PricingCardMeta = {
   features: string[];
   emphasizedFeatureIndexes?: number[];
   ctaLabel: string;
+  ctaUrl: string;
   ctaVariant: 'primary' | 'secondary';
   badgeLabel?: string;
 };
 
 export const PRICING_PLANS: Record<PricingMode, PricingPlan[]> = {
   monthly: [
-    { name: 'Free forever', description: 'Perfect for trying out personalized video at no cost.', price: '$0', suffix: '' },
-    { name: 'Explorer Plan', description: 'Great for getting started with scalable outreach.', price: '$49', suffix: '/mo' },
-    { name: 'Rainmaker Plan', description: 'Ideal for growing outreach with higher volume.', price: '$149', suffix: '/mo' },
-    { name: 'Titan Plan', description: 'Best for power users needing maximum reach.', price: '$399', suffix: '/mo' },
+    { name: 'Explorer Plan', description: 'Start a 14-day free trial for lightweight outreach.', price: '$49', suffix: '/mo' },
+    { name: 'Rainmaker Plan', description: 'Start a 14-day free trial for growing outreach teams.', price: '$149', suffix: '/mo' },
+    { name: 'Titan Plan', description: 'Start a 14-day free trial for maximum reach.', price: '$399', suffix: '/mo' },
   ],
   yearly: [
-    { name: 'Free forever', description: 'Perfect for trying out personalized video at no cost.', price: '$0', suffix: '' },
-    { name: 'Explorer Plan', description: 'Great for getting started with scalable outreach.', price: '$44', suffix: '/mo' },
-    { name: 'Rainmaker Plan', description: 'Ideal for growing outreach with higher volume.', price: '$134', suffix: '/mo' },
-    { name: 'Titan Plan', description: 'Best for power users needing maximum reach.', price: '$359', suffix: '/mo' },
+    { name: 'Explorer Plan', description: 'Start a 14-day free trial for lightweight outreach.', price: '$44', suffix: '/mo' },
+    { name: 'Rainmaker Plan', description: 'Start a 14-day free trial for growing outreach teams.', price: '$134', suffix: '/mo' },
+    { name: 'Titan Plan', description: 'Start a 14-day free trial for maximum reach.', price: '$359', suffix: '/mo' },
   ],
 };
 
 export const PRICING_CARD_META: PricingCardMeta[] = [
-  {
-    features: [
-      'Personalize videos with your prospect’s name',
-      'Try sending up to 15 messages',
-      'Explore the full system before upgrading',
-      'Customize 1 variable',
-      'Support via email',
-    ],
-    ctaLabel: 'Start free',
-    ctaVariant: 'secondary',
-  },
   {
     features: [
       'Expect 1–2 customers back',
@@ -52,8 +40,9 @@ export const PRICING_CARD_META: PricingCardMeta[] = [
       'Support via email',
     ],
     emphasizedFeatureIndexes: [0],
-    ctaLabel: 'Choose Plan',
-    ctaVariant: 'primary',
+    ctaLabel: 'Sign up for Free Trial',
+    ctaUrl: 'https://tally.so/r/dWDpPq',
+    ctaVariant: 'secondary',
   },
   {
     features: [
@@ -65,7 +54,8 @@ export const PRICING_CARD_META: PricingCardMeta[] = [
       'Dedicated onboarding',
     ],
     emphasizedFeatureIndexes: [0],
-    ctaLabel: 'Choose Plan',
+    ctaLabel: 'Sign up for Free Trial',
+    ctaUrl: 'https://tally.so/r/lb7x7X',
     ctaVariant: 'primary',
     badgeLabel: 'MOST POPULAR',
   },
@@ -79,7 +69,8 @@ export const PRICING_CARD_META: PricingCardMeta[] = [
       'Dedicated onboarding',
     ],
     emphasizedFeatureIndexes: [0],
-    ctaLabel: 'Choose Plan',
+    ctaLabel: 'Sign up for Free Trial',
+    ctaUrl: 'https://tally.so/r/1AJLD1',
     ctaVariant: 'primary',
   },
 ];

@@ -1,6 +1,6 @@
 import svgPaths from "./svg-8f2va8j35u";
 import imgOriginalLogo from "figma:asset/c2b10a66c9a06b0bf91cd7f627bcbb337569e1e6.png";
-import imgRectangle213 from "figma:asset/b7b5d6c0643bb2de8cd4a538831395c41bf525de.png";
+import uploadVideoDealership from "../assets/upload-video-dealership.jpg";
 import imgImg3 from "figma:asset/a06262fe2ea05c8beb973d432f11447dacfa4019.png";
 import imgFrame127 from "figma:asset/71837126e3f57484c9e27a21faae4a92e9f13858.png";
 import imgFrame128 from "figma:asset/88e2fd6ff71727d4b3acaa50b570d74511cf816e.png";
@@ -1290,7 +1290,7 @@ function Frame93() {
   return (
     <div className="bg-[#cbcbcb] h-[126.754px] overflow-clip relative rounded-[4.225px] shrink-0 w-full">
       <div className="absolute h-[146.452px] left-0 right-[-0.13px] top-0">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle213} />
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={uploadVideoDealership} />
       </div>
       <Frame92 />
     </div>
@@ -1317,7 +1317,7 @@ function PreviewTimer() {
 function DashboardPreview() {
   return (
     <div className="absolute left-1/2 top-[18px] h-[206px] w-[304px] -translate-x-1/2 overflow-hidden rounded-[20px] bg-white shadow-[0px_18px_40px_rgba(15,23,42,0.16)]">
-      <img alt="" className="size-full object-cover" src={imgRectangle213} />
+      <img alt="" className="size-full object-cover" src={uploadVideoDealership} />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.08)_0%,rgba(15,23,42,0)_26%,rgba(15,23,42,0.18)_100%)]" />
       <PreviewBadge />
       <PreviewTimer />
@@ -1418,8 +1418,7 @@ function Group2() {
   return (
     <div className="-translate-x-1/2 -translate-y-1/2 absolute contents left-[calc(50%+0.26px)] top-[calc(50%-0.35px)]">
       <div className="-translate-x-1/2 absolute border border-[#6397f7] border-dashed bottom-[22px] h-[230px] left-1/2 rounded-[20px] top-[18px] w-[328px]" />
-      <DashboardPreview />
-      <div className="absolute bottom-[18px] right-[52px] flex h-[205.301px] items-center justify-center w-[232.908px]" style={{ "--transform-inner-width": "1200", "--transform-inner-height": "152" } as React.CSSProperties}>
+      <div className="absolute left-1/2 top-1/2 flex h-[205.301px] w-[232.908px] -translate-x-1/2 -translate-y-1/2 items-center justify-center" style={{ "--transform-inner-width": "1200", "--transform-inner-height": "152" } as React.CSSProperties}>
         <div className="flex-none rotate-[2.69deg]">
           <FileUploadItemBase />
         </div>
@@ -1663,7 +1662,7 @@ function Frame94() {
   return (
     <div className="bg-[#cbcbcb] h-[136.533px] overflow-clip relative rounded-[4.551px] shrink-0 w-full">
       <div className="absolute h-[149.618px] left-0 top-0 w-[208.213px]">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle213} />
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={uploadVideoDealership} />
       </div>
       <Frame97 />
     </div>
@@ -2733,13 +2732,12 @@ function Button() {
 
 function TopContainer1() {
   return (
-    <div className="h-[267px] relative rounded-[16px] shrink-0 w-full" data-name="Top container">
-      <div aria-hidden="true" className="absolute bg-clip-padding border-0 border-[transparent] border-solid inset-0 pointer-events-none rounded-[16px]">
-        <div className="absolute bg-[#d9d9d9] bg-clip-padding border-0 border-[transparent] border-solid inset-0 rounded-[16px]" />
-        <img alt="" className="absolute bg-clip-padding border-0 border-[transparent] border-solid max-w-none object-cover rounded-[16px] size-full" src={imgTopContainer} />
-      </div>
-      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start p-[16px] relative size-full">
-        <Button />
+    <div className="bg-white relative rounded-[16px] shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0 w-full" data-name="Top container">
+      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[16px] items-start p-[16px] relative w-full">
+        <Container6 />
+        <div className="flex flex-col font-['Geist:regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#18181b] text-[16px] w-full">
+          <p className="leading-[1.5]">{`"Promoflix helped us personalize email responses at a scale we couldn't have imagined before. Our reply rate tripled in the first week. Our reply rate tripled in the first week."`}</p>
+        </div>
       </div>
     </div>
   );
@@ -2904,6 +2902,7 @@ function TopText() {
     <div className="content-stretch flex flex-col font-['Geist:semibold',sans-serif] gap-[4px] items-center not-italic relative shrink-0 text-center w-full" data-name="top text">
       <p className="leading-[1.5] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">OUR PRICING</p>
       <p className="leading-[1.3] relative shrink-0 text-[44px] text-black tracking-[-2px] w-full">Simple, transparent pricing</p>
+      <p className="font-['Geist:regular',sans-serif] leading-[1.5] relative shrink-0 text-[#70707b] text-[20px] w-full">Choose a plan and start a 14-day free trial.</p>
     </div>
   );
 }
@@ -2916,7 +2915,7 @@ function MonthlyYearlyToggle({ pricingMode, onPricingModeChange }: LayoutProps) 
 
 function CardsWrap({ plans }: { plans: PricingPlan[] }) {
   return (
-    <div className="gap-x-[12px] gap-y-[12px] grid grid-cols-[repeat(4,minmax(0,1fr))] grid-rows-[repeat(1,minmax(0,1fr))] h-[570px] relative shrink-0 w-full" data-name="cards wrap">
+    <div className="gap-x-[12px] gap-y-[12px] grid grid-cols-[repeat(3,minmax(0,1fr))] grid-rows-[repeat(1,minmax(0,1fr))] h-[570px] relative shrink-0 w-full" data-name="cards wrap">
       <PricingPlanCard
         className="bg-white col-1 content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-1 self-stretch shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0"
         featureContainerClassName="flex-[1_0_0] min-h-px min-w-px relative w-full"
@@ -2934,12 +2933,6 @@ function CardsWrap({ plans }: { plans: PricingPlan[] }) {
         featureContainerClassName="flex-[1_0_0] min-h-px min-w-px relative w-full"
         meta={PRICING_CARD_META[2]}
         plan={plans[2]}
-      />
-      <PricingPlanCard
-        className="bg-white col-4 content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-1 self-stretch shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0"
-        featureContainerClassName="flex-[1_0_0] min-h-px min-w-px relative w-full"
-        meta={PRICING_CARD_META[3]}
-        plan={plans[3]}
       />
     </div>
   );
@@ -3028,7 +3021,7 @@ function EmailInputWrap() {
       <div className="flex flex-row items-center self-stretch">
         <Input />
       </div>
-      <div className="bg-white content-stretch flex items-center justify-center px-[18px] py-[8px] relative rounded-[8px] shrink-0 w-[40px]" data-name="Button">
+      <div className="bg-white content-stretch flex items-center justify-center px-[18px] py-[8px] relative rounded-[8px] shrink-0 w-[40px]" data-action="open-external-url" data-external-url="https://tally.so/r/q4K9v9" data-name="Button">
         <div aria-hidden="true" className="absolute border border-[#e4e4e7] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)]" />
         <TextPadding11 />
         <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_0px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]" />
