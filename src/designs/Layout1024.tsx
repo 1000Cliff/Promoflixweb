@@ -13,7 +13,7 @@ import { PricingModeToggle } from "../components/PricingModeToggle";
 import { PricingPlanCard } from "../components/PricingPlanCard";
 import { FooterPromoflixGradient } from "../components/FooterPromoflixGradient";
 import { FooterLinkColumns } from "../components/FooterLinkColumns";
-import { PRICING_CARD_META, PRICING_PLANS, PricingMode, PricingPlan } from "../components/promo-flix-landing/constants";
+import { CONTACT_SALES_URL, PRICING_CARD_META, PRICING_PLANS, PricingMode, PricingPlan } from "../components/promo-flix-landing/constants";
 
 type LayoutProps = {
   pricingMode?: PricingMode;
@@ -138,6 +138,16 @@ function NavWrap() {
       <div className="content-stretch flex items-center justify-center relative shrink-0" data-action="scroll-to-section" data-section-target="pricing" data-name="Button">
         <p className="font-['Geist:medium',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#3f3f46] text-[16px] whitespace-nowrap">Pricing</p>
       </div>
+      <details className="group relative shrink-0">
+        <summary className="list-none cursor-pointer font-['Geist:medium',sans-serif] leading-[24px] text-[#3f3f46] text-[16px] whitespace-nowrap">
+          <span className="inline-flex items-center gap-[6px]">Industries<span className="text-[12px]">▾</span></span>
+        </summary>
+        <div className="absolute left-0 top-[34px] min-w-[160px] rounded-[10px] border border-[#e4e4e7] bg-white p-[8px] shadow-[0px_8px_24px_rgba(16,24,40,0.12)]">
+          <a className="block rounded-[6px] px-[10px] py-[8px] text-[15px] text-[#3f3f46] hover:bg-[#f4f4f5]" href="/industries">
+            Sample
+          </a>
+        </div>
+      </details>
       <Actions />
     </div>
   );
@@ -2463,15 +2473,52 @@ function TopText() {
   return (
     <div className="content-stretch flex flex-col font-['Geist:semibold',sans-serif] gap-[4px] items-center not-italic relative shrink-0 text-center w-full" data-name="top text">
       <p className="leading-[1.5] relative shrink-0 text-[#2952e8] text-[14px] uppercase w-full">OUR PRICING</p>
-      <p className="leading-[1.3] relative shrink-0 text-[44px] text-black tracking-[-2px] w-full">Simple, transparent pricing</p>
-      <p className="font-['Geist:regular',sans-serif] leading-[1.5] relative shrink-0 text-[#70707b] text-[20px] w-full">Choose a plan and start a 14-day free trial.</p>
+      <p className="leading-[1.22] relative shrink-0 text-[52px] text-black tracking-[-1px] w-full">Try Promoflix free for 14 days. See how it improves outreach. Cancel anytime.</p>
+    </div>
+  );
+}
+
+function PricingTrialInfo() {
+  return (
+    <div className="w-full rounded-[16px] bg-[#f8f8f8] p-[12px] md:p-[16px]">
+      <div className="grid grid-cols-1 gap-[12px] xl:grid-cols-[1fr_1fr_0.95fr]">
+        <div className="rounded-[12px] bg-white px-[16px] py-[14px] text-center min-h-[158px] flex flex-col justify-center">
+          <p className="font-['Geist:regular',sans-serif] text-[#18181b] text-[16px] leading-[1.6]">✓ Create up to 10 videos before you pay.</p>
+          <p className="font-['Geist:regular',sans-serif] mt-[10px] text-[#18181b] text-[16px] leading-[1.6]">✓ Cancel anytime, no questions asked.</p>
+        </div>
+        <div className="rounded-[12px] bg-white px-[16px] py-[14px] text-center min-h-[158px] flex flex-col justify-center">
+          <p className="font-['Geist:regular',sans-serif] text-[#18181b] text-[16px] leading-[1.6]">✓ Card not charged until Day 15.</p>
+          <p className="font-['Geist:regular',sans-serif] mt-[10px] text-[#18181b] text-[16px] leading-[1.6]">✓ Trial works on every paid tier.</p>
+        </div>
+        <div className="rounded-[12px] border border-[#d6def5] bg-[#e9eefb] px-[18px] py-[16px]">
+          <p className="font-['Geist:semibold',sans-serif] text-[#18181b] text-[30px] leading-[1.1] tracking-[-1px]">Not sure yet?</p>
+          <p className="font-['Geist:regular',sans-serif] mt-[8px] text-[#535862] text-[16px] leading-[1.55]">Start your free 14-day trial on any plan and see exactly what Promoflix can do for your outreach. No charges, no commitment, just results.</p>
+        </div>
+      </div>
     </div>
   );
 }
 
 function MonthlyYearlyToggle({ pricingMode, onPricingModeChange }: LayoutProps) {
   return (
-    <PricingModeToggle onPricingModeChange={onPricingModeChange} pricingMode={pricingMode ?? 'yearly'} />
+    <PricingModeToggle onPricingModeChange={onPricingModeChange} pricingMode={pricingMode ?? 'monthly'} />
+  );
+}
+
+function EnterpriseCard() {
+  return (
+    <div className="bg-[radial-gradient(circle_at_92%_8%,rgba(99,151,247,0.18),transparent_26%),radial-gradient(circle_at_8%_92%,rgba(99,151,247,0.14),transparent_28%),radial-gradient(circle_at_92%_88%,rgba(99,151,247,0.12),transparent_24%),linear-gradient(180deg,#eef4ff_0%,#dfe7ff_100%)] col-2 content-stretch flex flex-col items-center justify-center rounded-[12px] row-2 self-stretch shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)]">
+      <div className="content-stretch flex flex-col gap-[20px] items-center px-[28px] py-[32px] w-full">
+        <div className="content-stretch flex flex-col gap-[10px] items-center w-full">
+          <p className="font-['Geist:semibold',sans-serif] text-[#2952e8] text-[14px] uppercase text-center w-full">Enterprise</p>
+          <p className="font-['Geist:semibold',sans-serif] leading-[1.25] text-[#18181b] text-[28px] text-center tracking-[-1px] w-full">Need a custom solution?</p>
+          <p className="font-['Geist:regular',sans-serif] leading-[1.55] text-[#535862] text-[16px] text-center w-full">Tailored video volume, dedicated support, custom integrations, and flexible billing for large teams.</p>
+        </div>
+        <div className="w-full">
+          <button className="bg-[#2952e8] font-['Geist:semibold',sans-serif] h-[48px] rounded-[8px] text-white w-full" data-action="open-external-url" data-external-url={CONTACT_SALES_URL}>Contact sales</button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -2491,11 +2538,12 @@ function CardsWrap({ plans }: { plans: PricingPlan[] }) {
         plan={plans[1]}
       />
       <PricingPlanCard
-        className="bg-white col-[1/span_2] content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-2 self-start shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0"
+        className="bg-white col-1 content-stretch flex flex-col items-start justify-self-stretch relative rounded-[12px] row-2 self-start shadow-[0px_1px_4px_0px_rgba(12,12,13,0.05)] shrink-0"
         featureContainerClassName="relative shrink-0 w-full"
         meta={PRICING_CARD_META[2]}
         plan={plans[2]}
       />
+      <EnterpriseCard />
     </div>
   );
 }
@@ -2519,13 +2567,14 @@ function Frame69() {
 }
 
 function Container11({ pricingMode, onPricingModeChange }: LayoutProps) {
-  const plans = PRICING_PLANS[pricingMode ?? "yearly"];
+  const plans = PRICING_PLANS[pricingMode ?? "monthly"];
 
   return (
     <div className="max-w-[1240px] relative shrink-0 w-full" data-name="container">
       <div className="flex flex-col items-center max-w-[inherit] size-full">
         <div className="content-stretch flex flex-col gap-[32px] items-center max-w-[inherit] px-[32px] relative w-full">
           <TopText />
+          <PricingTrialInfo />
           <MonthlyYearlyToggle onPricingModeChange={onPricingModeChange} pricingMode={pricingMode} />
           <CardsWrap plans={plans} />
           <Frame69 />
@@ -2798,7 +2847,7 @@ function Footer4() {
   );
 }
 
-export default function Component({ pricingMode = 'yearly', onPricingModeChange }: LayoutProps) {
+export default function Component({ pricingMode = 'monthly', onPricingModeChange }: LayoutProps) {
   return (
     <div className="content-stretch flex flex-col isolate items-center relative size-full" data-name="1024">
       <div className="absolute bottom-0 h-[6723.806640625px] left-[calc(50%-2px)] pointer-events-none top-[16px]">

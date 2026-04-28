@@ -12,7 +12,18 @@ const LeadCaptureModal = lazy(async () => {
 });
 
 const INTERACTIVE_SELECTOR = '[data-action], [data-name="Button"], [data-name*="Button"], button, a, [role="button"]';
-const PRICING_CTA_LABELS = new Set(['Try it free', 'Try for free', 'Try for free →', 'Start free', 'Start free →', 'Choose Plan', 'Choose Promoflix']);
+const PRICING_CTA_LABELS = new Set([
+  'Try it free',
+  'Try for free',
+  'Try for free →',
+  'Start free',
+  'Start free →',
+  'Start your campaign',
+  'Start your free trial',
+  'Start My Free Trial',
+  'Choose Plan',
+  'Choose Promoflix',
+]);
 const EXAMPLE_CTA_LABELS = new Set(['Send me example', 'Send real example', 'See real example', 'Get a real example']);
 const EXAMPLE_FORM_URL = 'https://tally.so/r/q4K9v9';
 const LOGIN_URL = 'https://app.promoflix.ai/auth/login';
@@ -21,7 +32,7 @@ const SIGNUP_URL = 'https://app.promoflix.ai/auth/signup';
 export function PromoFlixLanding() {
   const width = useViewportWidth();
   const showScrollTop = useScrollTopVisibility(500);
-  const [pricingMode, setPricingMode] = useState<PricingMode>('yearly');
+  const [pricingMode, setPricingMode] = useState<PricingMode>('monthly');
   const [showLeadCaptureModal, setShowLeadCaptureModal] = useState(false);
 
   const scrollToTop = () => {

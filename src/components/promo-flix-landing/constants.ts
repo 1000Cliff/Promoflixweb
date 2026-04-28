@@ -16,16 +16,18 @@ export type PricingCardMeta = {
   badgeLabel?: string;
 };
 
+export const CONTACT_SALES_URL = 'mailto:hello@promoflix.com';
+
 export const PRICING_PLANS: Record<PricingMode, PricingPlan[]> = {
   monthly: [
-    { name: 'Explorer Plan', description: 'Start a 14-day free trial for lightweight outreach.', price: '$49', suffix: '/mo' },
-    { name: 'Rainmaker Plan', description: 'Start a 14-day free trial for growing outreach teams.', price: '$149', suffix: '/mo' },
-    { name: 'Titan Plan', description: 'Start a 14-day free trial for maximum reach.', price: '$399', suffix: '/mo' },
+    { name: 'Explorer Plan', description: 'Start a 14-day free trial for lightweight outreach.', price: '$59', suffix: '/mo' },
+    { name: 'Rainmaker Plan', description: 'Start a 14-day free trial for growing outreach teams.', price: '$159', suffix: '/mo' },
+    { name: 'Titan Plan', description: 'Start a 14-day free trial for maximum reach.', price: '$379', suffix: '/mo' },
   ],
   yearly: [
-    { name: 'Explorer Plan', description: 'Start a 14-day free trial for lightweight outreach.', price: '$44', suffix: '/mo' },
-    { name: 'Rainmaker Plan', description: 'Start a 14-day free trial for growing outreach teams.', price: '$134', suffix: '/mo' },
-    { name: 'Titan Plan', description: 'Start a 14-day free trial for maximum reach.', price: '$359', suffix: '/mo' },
+    { name: 'Explorer Plan', description: 'Start a 14-day free trial for lightweight outreach.', price: '$53', suffix: '/mo' },
+    { name: 'Rainmaker Plan', description: 'Start a 14-day free trial for growing outreach teams.', price: '$143', suffix: '/mo' },
+    { name: 'Titan Plan', description: 'Start a 14-day free trial for maximum reach.', price: '$341', suffix: '/mo' },
   ],
 };
 
